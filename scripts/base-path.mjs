@@ -1,5 +1,5 @@
 // Serves the site from a sub-path (GitHub Pages project sites live at
-// https://<user>.github.io/<repo>/). Set BASE_PATH=/the-derma-house at build time and
+// https://<user>.github.io/<repo>/). Set BASE_PATH=/gowigro-clinic-template at build time and
 // every root-relative URL in the built HTML is prefixed. Without BASE_PATH nothing changes,
 // so the same source deploys to a root domain (dermahouseclinic.com) as before.
 import { readdir, readFile, writeFile } from 'node:fs/promises';

@@ -50,6 +50,6 @@ The form validates name and Indian mobile number, then opens WhatsApp to +91 790
 - [ ] Return HTTP 410 for the off-target city blog posts (San Diego, California, Bangalore)
 
 ## Deploy
-**Live preview:** https://cyberali-eng.github.io/the-derma-house/ (GitHub Pages, redeployed by `.github/workflows/deploy.yml` on every push to `main`). The Pages build sets `BASE_PATH=/the-derma-house` and `PUBLIC_NOINDEX=true`, so it stays out of search results while dermahouseclinic.com is live.
+**Live preview:** https://cyberali-eng.github.io/gowigro-clinic-template/ (GitHub Pages, redeployed by `.github/workflows/deploy.yml` on every push to `main`). The Pages build sets `BASE_PATH=/the-derma-house` and `PUBLIC_NOINDEX=true`, so it stays out of search results while dermahouseclinic.com is live.
 
 For the real domain, any static host works (Netlify, Vercel, Cloudflare Pages, Hostinger): build command `npm run build` with no `BASE_PATH`, output directory `dist`.
