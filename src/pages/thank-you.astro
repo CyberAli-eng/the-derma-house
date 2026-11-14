@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { clinic, whatsappLink } from '../data/clinic';
+---
+
+<Base title="Thank you" description="Your consultation request has been sent to The Derma House." noindex>
+  <section class="section">
+    <div class="wrap ty">
+      <span class="ty__icon"><Icon name="check" size={36} /></span>
+      <h1>Thank you. We have your request.</h1>
+      <p class="lede">
+        Your request is ready in WhatsApp. Press send there and our team will confirm your appointment within 24 hours
+        ({clinic.hours.label}).
+      </p>
+      <p>WhatsApp didn’t open? Use the button below, or call <a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a>.</p>
+      <div class="ty__actions">
+        <a class="btn btn--gold" href={whatsappLink()} target="_blank" rel="noopener" data-wa-retry>Send request on WhatsApp</a>
+        <a class="btn" href="/treatments/">Explore treatments</a>
+        <a class="btn btn--ghost" href="/">Back to home</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  try {
+    const url = sessionStorage.getItem('tdh-booking-wa');
+    const link = document.querySelector<HTMLAnchorElement>('[data-wa-retry]');
+    if (url && link && url.startsWith('https://wa.me/')) link.href = url;
+  } catch {
+    /* storage unavailable: keep the generic WhatsApp link */
+  }
+</script>
+
+<style>
+  .ty {
+    max-width: 680px;
+    text-align: center;
+    display: grid;
+    justify-items: center;
+  }
+
+  .ty__icon {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--gold-soft);
+    color: var(--gold-600);
+    margin-bottom: 24px;
+  }
+
+  .ty h1 {
+    font-size: var(--step-3);
+  }
+
+  .ty__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+</style>

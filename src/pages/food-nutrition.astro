@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { nutritionist, nutritionTopics, nutritionSupport } from '../data/content';
+import { img } from '../data/categories';
+import { whatsappLink } from '../data/clinic';
+---
+
+<Base
+  title="Food, Nutrition & Dietetics"
+  description="Personalised nutrition guidance from Dt. Maheep Dhaliwal, Clinical Nutritionist at The Derma House, Kaithal, for healthy skin, hair, weight and wellness."
+  image={img.nutrition}
+>
+  <PageHero
+    title="Nourish your body. Support your health."
+    eyebrow="Food, nutrition & dietetics"
+    lede="Understand how personalised nutrition can support your skin, hair, weight management and overall wellbeing."
+    crumbs={[{ label: 'Food, Nutrition & Dietetics' }]}
+    image={img.nutrition.replace('w=1200', 'w=800')}
+    imageAlt="Colourful balanced meal bowl"
+  >
+    <a class="btn cta" href={whatsappLink('Hello, I would like to book a nutrition consultation with Dt. Maheep Dhaliwal.')} target="_blank" rel="noopener">
+      <Icon name="whatsapp" /> Book a nutrition consult
+    </a>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap profile">
+      <div class="profile__badge" aria-hidden="true"><Icon name="leaf" size={44} /></div>
+      <div>
+        <p class="eyebrow">Meet our clinical nutritionist</p>
+        <h2>{nutritionist.name}</h2>
+        <p class="role">{nutritionist.qualification} · {nutritionist.role}</p>
+        <p class="lede">{nutritionist.bio}</p>
+        <ul class="chips">
+          <li class="chip">Personalised diet plans</li>
+          <li class="chip">Practical nutrition guidance</li>
+          <li class="chip">Sustainable lifestyle support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="wrap">
+      <div class="grid grid--3">
+        {
+          nutritionTopics.map((t) => (
+            <section class="card topic reveal">
+              <h3>{t.title}</h3>
+              <p>{t.body}</p>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nutrition support for</p>
+        <h2>Where nutrition makes a difference</h2>
+      </div>
+      <ul class="support">
+        {nutritionSupport.map((s) => <li><Icon name="check" /> {s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand title="Pair your treatment with the right nutrition." body="Skin and hair respond best when treatment and diet work together. Ask us about a combined plan." />
+</Base>
+
+<style>
+  .cta {
+    margin-top: 24px;
+  }
+
+  .profile {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+    max-width: 980px;
+  }
+
+  .profile__badge {
+    display: grid;
+    place-items: center;
+    width: 160px;
+    height: 190px;
+    border-radius: var(--arch);
+    background: var(--gold-soft);
+    color: var(--gold-600);
+  }
+
+  .role {
+    font-weight: 700;
+    color: var(--gold-600);
+  }
+
+  .topic {
+    padding: 26px;
+  }
+
+  .topic p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  .support {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .support li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 22px;
+    border-radius: var(--radius);
+    background: var(--navy);
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .support svg {
+    color: var(--gold);
+  }
+
+  @media (max-width: 640px) {
+    .profile {
+      grid-template-columns: 1fr;
+    }
+
+    .profile__badge {
+      width: 110px;
+      height: 130px;
+    }
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import type { Treatment } from '../data/categories';
+interface Props {
+  treatment: Treatment;
+  showCategory?: string;
+}
+const { treatment: t, showCategory } = Astro.props;
+---
+
+<a class="tcard card reveal" href={`/${t.slug}/`} data-category={t.category}>
+  {showCategory && <span class="tcard__cat">{showCategory}</span>}
+  <h3 class="tcard__title">{t.title}</h3>
+  <p class="tcard__summary">{t.summary}</p>
+  {
+    t.indications.length > 0 && (
+      <p class="tcard__for">
+        <span>Helps with:</span> {t.indications.slice(0, 3).join(', ')}
+      </p>
+    )
+  }
+  <span class="link-arrow">View treatment</span>
+</a>
+
+<style>
+  .tcard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 26px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .tcard:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold-soft);
+    box-shadow: var(--shadow-lg);
+    color: var(--ink);
+  }
+
+  .tcard__cat {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+  }
+
+  .tcard__title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .tcard__summary {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  .tcard__for {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+  }
+
+  .tcard__for span {
+    font-weight: 700;
+    color: var(--navy-900);
+  }
+
+  .tcard .link-arrow {
+    margin-top: auto;
+    padding-top: 8px;
+  }
+</style>

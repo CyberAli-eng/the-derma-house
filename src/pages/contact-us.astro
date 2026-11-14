@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import BookingForm from '../components/BookingForm.astro';
+import FaqList from '../components/FaqList.astro';
+import Icon from '../components/Icon.astro';
+import { contactFaq } from '../data/content';
+import { clinic, fullAddress, whatsappLink } from '../data/clinic';
+
+const ways = [
+  { icon: 'phone', title: 'Call us', body: 'Speak to our friendly team.', label: clinic.phoneDisplay, href: `tel:${clinic.phoneE164}` },
+  { icon: 'whatsapp', title: 'WhatsApp us', body: 'Send us a WhatsApp message.', label: 'Message on WhatsApp', href: whatsappLink() },
+  { icon: 'mail', title: 'Email us', body: 'We are here to help.', label: clinic.email, href: `mailto:${clinic.email}` },
+  { icon: 'pin', title: 'Visit us', body: fullAddress, label: 'Get directions', href: clinic.mapsLink },
+] as const;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: contactFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+
+<Base
+  title="Contact & Directions"
+  description={`Contact The Derma House, ${fullAddress}. Call ${clinic.phoneDisplay}, WhatsApp us or visit ${clinic.hours.label}.`}
+  schema={[faqSchema]}
+>
+  <PageHero title="Let’s connect" eyebrow="Contact" lede="Choose the way that suits you. We reply within 24 hours." crumbs={[{ label: 'Contact' }]} />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="ways">
+        {
+          ways.map((w) => (
+            <a class="way card" href={w.href} target={w.href.startsWith('http') ? '_blank' : undefined} rel={w.href.startsWith('http') ? 'noopener' : undefined}>
+              <span class="way__icon"><Icon name={w.icon} size={22} /></span>
+              <h2 class="way__title">{w.title}</h2>
+              <p>{w.body}</p>
+              <span class="way__label">{w.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="wrap split">
+      <div>
+        <h2>Send us your query</h2>
+        <p class="lede">Tell us a little about your concern and the best number to reach you.</p>
+        <iframe class="map" title="Map showing The Derma House, Kaithal" src={clinic.mapsEmbed} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p class="hours"><Icon name="clock" /> {clinic.hours.label} · {clinic.hours.note}</p>
+      </div>
+      <BookingForm title="Send your query" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>Frequently asked questions</h2>
+      <FaqList items={contactFaq} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ways {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .way {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 26px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .way__icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--ice);
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .way__title {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .way p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  .way__label {
+    margin-top: auto;
+    padding-top: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    word-break: break-word;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 5vw, 64px);
+  }
+
+  .map {
+    width: 100%;
+    min-height: 320px;
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--ice);
+  }
+
+  .hours {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: var(--ink-2);
+  }
+
+  .narrow {
+    max-width: 820px;
+  }
+
+  @media (max-width: 960px) {
+    .ways {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .ways {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

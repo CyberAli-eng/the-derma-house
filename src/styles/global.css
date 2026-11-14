@@ -1,0 +1,406 @@
+/* The Derma House design tokens.
+   Brand equity kept from the old site: navy #00314D, ice blue #E6F6FF, Lato,
+   plus the gold from the logo, which the old site never used on the page. */
+:root {
+  --navy-950: #001a2b;
+  --navy-900: #00243a;
+  --navy: #00314d;
+  --navy-700: #0b4566;
+  --navy-500: #3d6a85;
+  --ice: #e6f6ff;
+  --ice-50: #f3faff;
+  --gold: #b48a3c;
+  --gold-600: #85621f;
+  --gold-soft: #efe3c6;
+  --paper: #fbfaf6;
+  --white: #ffffff;
+  --ink: #0d1b24;
+  --ink-2: #3c4b55;
+  --ink-3: #5d6c76;
+  --line: #d9e4eb;
+  --line-soft: #e9eff3;
+  --success: #1e6b4a;
+  --danger: #a3302a;
+
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-body: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --step--1: clamp(0.84rem, 0.82rem + 0.1vw, 0.9rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.075rem);
+  --step-1: clamp(1.15rem, 1.1rem + 0.3vw, 1.3rem);
+  --step-2: clamp(1.4rem, 1.25rem + 0.7vw, 1.8rem);
+  --step-3: clamp(1.9rem, 1.55rem + 1.6vw, 2.9rem);
+  --step-4: clamp(2.5rem, 1.9rem + 2.8vw, 4.4rem);
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 24px;
+  --arch: 999px 999px 24px 24px;
+  --shadow: 0 1px 2px rgb(0 36 58 / 0.06), 0 8px 24px rgb(0 36 58 / 0.08);
+  --shadow-lg: 0 24px 60px rgb(0 36 58 / 0.16);
+  --wrap: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section: clamp(64px, 9vw, 120px);
+  --header-h: 76px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--navy);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--gold-600);
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  color: var(--navy-900);
+  text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-1);
+  font-weight: 700;
+}
+
+p {
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+.section--ice {
+  background: var(--ice-50);
+}
+
+.section--navy {
+  background: var(--navy);
+  color: #dbe8f0;
+}
+
+.section--navy h2,
+.section--navy h3 {
+  color: var(--white);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-600);
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+}
+
+.section--navy .eyebrow {
+  color: var(--gold-soft);
+}
+
+.lede {
+  font-size: var(--step-1);
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+
+.section--navy .lede {
+  color: #c4d6e2;
+}
+
+.section-head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: clamp(32px, 5vw, 56px);
+  max-width: 720px;
+}
+
+.section-head--split {
+  max-width: none;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+}
+
+@media (max-width: 720px) {
+  .section-head--split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Buttons */
+.btn {
+  --bg: var(--navy);
+  --fg: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1.5px solid var(--bg);
+  background: var(--bg);
+  color: var(--fg);
+  font: 700 0.95rem/1 var(--font-body);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+  --bg: var(--navy-700);
+  color: var(--fg);
+  transform: translateY(-1px);
+}
+
+.btn--gold {
+  --bg: var(--gold);
+  --fg: var(--navy-950);
+}
+
+.btn--gold:hover {
+  --bg: #c79c4c;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--navy);
+}
+
+.btn--ghost:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.btn--light {
+  --bg: var(--white);
+  --fg: var(--navy);
+}
+
+.btn--light:hover {
+  --bg: var(--ice);
+  color: var(--navy);
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--navy);
+}
+
+.link-arrow::after {
+  content: '→';
+  transition: transform 0.2s ease;
+}
+
+.link-arrow:hover::after {
+  transform: translateX(4px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--navy-900);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+a.chip:hover {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  color: var(--navy-900);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+}
+
+.grid--3 {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+.grid--4 {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  background: var(--navy);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  top: 12px;
+  color: var(--white);
+}
+
+.prose h2 {
+  font-size: var(--step-2);
+  margin-top: 1.6em;
+}
+
+.prose ul {
+  padding-left: 1.2em;
+}
+
+.prose li {
+  margin-bottom: 0.4em;
+}
+
+/* Content is visible by default; it only animates once JS has confirmed it can reveal it.
+   (The old site hid whole sections until a scroll animation fired, leaving blank gaps.) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

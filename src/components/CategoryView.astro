@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from './PageHero.astro';
+import CtaBand from './CtaBand.astro';
+import TreatmentCard from './TreatmentCard.astro';
+import { categoryBySlug, treatmentsIn, categories } from '../data/categories';
+import { clinic } from '../data/clinic';
+
+interface Props {
+  slug: string;
+}
+const category = categoryBySlug(Astro.props.slug);
+if (!category) throw new Error(`Unknown category: ${Astro.props.slug}`);
+const items = treatmentsIn(category.slug);
+const others = categories.filter((c) => c.slug !== category.slug);
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: clinic.site + '/' },
+      { '@type': 'ListItem', position: 2, name: category.title, item: `${clinic.site}/${category.slug}/` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${category.title} at ${clinic.name}`,
+    itemListElement: items.map((t, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${clinic.site}/${t.slug}/`,
+      name: t.title,
+    })),
+  },
+];
+---
+
+<Base
+  title={`${category.title} in Kaithal`}
+  description={`${category.intro.slice(0, 140)} Book at The Derma House, Kaithal.`}
+  image={category.image}
+  schema={schema}
+>
+  <PageHero
+    title={category.title}
+    eyebrow={`${items.length} treatments`}
+    lede={category.intro}
+    crumbs={[{ label: 'Treatments', href: '/treatments/' }, { label: category.title }]}
+    image={category.image.replace('w=1200', 'w=800')}
+    imageAlt={category.imageAlt}
+  >
+    <div class="actions">
+      <a class="btn" href="/book-consultation/">Book consultation</a>
+      <a class="btn btn--ghost" href={`tel:${clinic.phoneE164}`}>Call {clinic.phoneDisplay}</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Choose a treatment</p>
+        <h2>{category.title} we offer</h2>
+      </div>
+      <div class="grid grid--3">
+        {items.map((t) => <TreatmentCard treatment={t} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Explore more</p>
+        <h2>Other treatment areas</h2>
+      </div>
+      <ul class="chips">
+        {others.map((c) => <li><a class="chip" href={`/${c.slug}/`}>{c.title}</a></li>)}
+        <li><a class="chip" href="/food-nutrition/">Food, Nutrition &amp; Dietetics</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand title={`Not sure which ${category.title.toLowerCase()} is right for you?`} body="A dermatologist will assess your skin, hair and medical history and recommend the right plan. No guesswork." />
+</Base>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+</style>

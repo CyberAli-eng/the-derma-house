@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { benefits, aboutFaq } from '../data/content';
+import { categories, img, treatments } from '../data/categories';
+import { clinic } from '../data/clinic';
+---
+
+<Base
+  title="About The Derma House"
+  description="Dr. Aanchal S. Kakkar's The Derma House is Kaithal's destination for advanced skin, hair, laser and aesthetic care, operated by Kakkar Healthcare."
+>
+  <PageHero
+    title="Skin, hair and aesthetic care, under one roof."
+    eyebrow="About the clinic"
+    lede="The Derma House is a dermatology and aesthetics clinic in Kaithal, Haryana. We combine expert dermatologists, FDA-approved technology and personalised plans to enhance your natural skin and hair safely."
+    crumbs={[{ label: 'About' }]}
+    image={img.interior.replace('w=1400', 'w=800')}
+    imageAlt="Calm, softly lit treatment lounge"
+  />
+
+  <section class="section">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">Our approach</p>
+        <h2>We treat the cause, not just the symptoms.</h2>
+        <p class="lede">
+          Founded as Dr. Aanchal S. Kakkar’s clinic and operated by {clinic.legalName}, The Derma House offers
+          {treatments.length} treatments across dermatology, lasers, hair restoration, anti-ageing, permanent makeup and
+          minor derma surgery, with an in-house clinical nutritionist.
+        </p>
+        <p>
+          With thousands of satisfied clients, our experienced dermatologists and technicians focus on safe, personalised
+          treatment. Every plan starts with a consultation, in the clinic or online, so you know what to expect before you
+          begin.
+        </p>
+      </div>
+      <ul class="pillars">
+        {
+          benefits.map((b) => (
+            <li class="card reveal">
+              <Icon name="check" size={20} />
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Specialities</p>
+        <h2>Explore our specialised treatments</h2>
+      </div>
+      <div class="grid grid--3">
+        {
+          categories.map((c) => (
+            <a class="spec card reveal" href={`/${c.slug}/`}>
+              <h3>{c.title}</h3>
+              <p>{c.intro}</p>
+              <span class="link-arrow">Explore</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head">
+        <p class="eyebrow">FAQ</p>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <FaqList items={aboutFaq} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .pillars {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .pillars li {
+    padding: 24px;
+  }
+
+  .pillars svg {
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .pillars p,
+  .spec p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+
+  .spec {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 26px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .spec h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    margin: 0;
+  }
+
+  .spec .link-arrow {
+    margin-top: auto;
+  }
+
+  .narrow {
+    max-width: 820px;
+  }
+
+  @media (max-width: 900px) {
+    .about,
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

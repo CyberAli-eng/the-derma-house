@@ -1,0 +1,186 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { clinic, whatsappLink } from '../data/clinic';
+import { img } from '../data/categories';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  schema?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const { title, description, image = img.hero, schema = [], noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, clinic.site).href;
+const fullTitle = title.includes(clinic.name) ? title : `${title} | ${clinic.name}, Kaithal`;
+
+const clinicSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['MedicalClinic', 'LocalBusiness'],
+  '@id': `${clinic.site}/#clinic`,
+  name: clinic.name,
+  legalName: clinic.legalName,
+  url: clinic.site,
+  telephone: clinic.phoneE164,
+  email: clinic.email,
+  image: img.hero,
+  medicalSpecialty: 'Dermatology',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: clinic.address.line1,
+    addressLocality: clinic.address.city,
+    addressRegion: clinic.address.region,
+    postalCode: clinic.address.postalCode,
+    addressCountry: clinic.address.country,
+  },
+  openingHours: clinic.hours.schema,
+  hasMap: clinic.mapsLink,
+  sameAs: [clinic.social.instagram, clinic.social.facebook],
+};
+const jsonLd = [clinicSchema, ...schema];
+---
+
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#00314d" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={clinic.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Lato:wght@400;700&display=swap"
+    />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <a class="wa-float" href={whatsappLink()} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+      <Icon name="whatsapp" size={26} />
+    </a>
+
+    <nav class="mobile-bar" aria-label="Quick contact">
+      <a href={`tel:${clinic.phoneE164}`}><Icon name="phone" /> Call</a>
+      <a href={whatsappLink()} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
+      <a class="mobile-bar__book" href="/book-consultation/"><Icon name="calendar" /> Book</a>
+    </nav>
+
+    <script>
+      const els = document.querySelectorAll<HTMLElement>('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-in');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-in'));
+      }
+    </script>
+
+    <style is:global>
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .wa-float {
+        position: fixed;
+        right: 20px;
+        bottom: 24px;
+        z-index: 40;
+        display: grid;
+        place-items: center;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #1f8f55;
+        color: var(--white);
+        box-shadow: 0 10px 30px rgb(0 0 0 / 0.2);
+        transition: transform 0.2s ease;
+      }
+
+      .wa-float:hover {
+        color: var(--white);
+        transform: scale(1.06);
+      }
+
+      .mobile-bar {
+        display: none;
+      }
+
+      @media (max-width: 1080px) {
+        .wa-float {
+          display: none;
+        }
+
+        .mobile-bar {
+          position: fixed;
+          inset: auto 0 0 0;
+          z-index: 45;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1.2fr;
+          gap: 8px;
+          padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+          background: rgb(255 255 255 / 0.96);
+          border-top: 1px solid var(--line);
+          backdrop-filter: blur(10px);
+        }
+
+        .mobile-bar a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          min-height: 46px;
+          border-radius: 999px;
+          border: 1px solid var(--line);
+          font-weight: 700;
+          font-size: 0.92rem;
+          color: var(--navy-900);
+          text-decoration: none;
+        }
+
+        .mobile-bar .mobile-bar__book {
+          background: var(--navy);
+          border-color: var(--navy);
+          color: var(--white);
+        }
+      }
+    </style>
+  </body>
+</html>

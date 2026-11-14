@@ -1,0 +1,320 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from './PageHero.astro';
+import BookingForm from './BookingForm.astro';
+import FaqList from './FaqList.astro';
+import TreatmentCard from './TreatmentCard.astro';
+import Icon from './Icon.astro';
+import { treatmentBySlug, categoryBySlug, treatmentsIn, treatmentExtras } from '../data/categories';
+import { clinic, whatsappLink } from '../data/clinic';
+
+interface Props {
+  slug: string;
+}
+const t = treatmentBySlug(Astro.props.slug);
+if (!t) throw new Error(`Unknown treatment: ${Astro.props.slug}`);
+const category = categoryBySlug(t.category)!;
+const related = treatmentsIn(t.category).filter((x) => x.slug !== t.slug).slice(0, 3);
+const extra = treatmentExtras[t.slug];
+const details = t.sections.slice(1);
+
+const description = `${t.summary} ${t.title} at The Derma House, Kaithal: personalised plans by certified dermatologists.`.slice(0, 158);
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalProcedure',
+    name: t.title,
+    description: t.summary,
+    url: `${clinic.site}/${t.slug}/`,
+    relevantSpecialty: 'Dermatology',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: clinic.site + '/' },
+      { '@type': 'ListItem', position: 2, name: category.title, item: `${clinic.site}/${category.slug}/` },
+      { '@type': 'ListItem', position: 3, name: t.title, item: `${clinic.site}/${t.slug}/` },
+    ],
+  },
+];
+if (t.faq.length) {
+  schema.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: t.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  });
+}
+---
+
+<Base title={`${t.title} in Kaithal`} description={description} image={category.image} schema={schema}>
+  <PageHero
+    title={t.title}
+    eyebrow={category.title}
+    lede={t.summary}
+    crumbs={[{ label: category.title, href: `/${category.slug}/` }, { label: t.title }]}
+  >
+    {
+      t.indications.length > 0 && (
+        <div class="indications">
+          <span class="indications__label">Recommended for</span>
+          <ul class="chips">
+            {t.indications.map((i) => (
+              <li class="chip">{i}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap layout">
+      <article class="detail">
+        <h2 class="detail__h">Understanding {t.title.toLowerCase()}</h2>
+        <dl class="facts">
+          {
+            details.map((s) => (
+              <div class="fact reveal">
+                <dt>{s.heading}</dt>
+                <dd>{s.body}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        {
+          extra && (
+            <div class="extra">
+              <h2>{extra.heading}</h2>
+              <ul class="extra__list">
+                {extra.items.map((i) => (
+                  <li>
+                    <Icon name="check" size={18} /> {i}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+
+        <div class="consult card">
+          <Icon name="shield" size={28} />
+          <div>
+            <h3>Every plan starts with a consultation</h3>
+            <p>
+              Results vary with skin type and condition. Your dermatologist will check your medical history, explain
+              expected results and aftercare, and confirm whether {t.title.toLowerCase()} is right for you.
+            </p>
+          </div>
+        </div>
+
+        {
+          t.faq.length > 0 && (
+            <div class="detail__faq">
+              <h2>Questions about {t.title}</h2>
+              <FaqList items={t.faq} />
+            </div>
+          )
+        }
+      </article>
+
+      <aside class="side">
+        <BookingForm title={`Book ${t.title}`} preset={category.title} compact />
+        <div class="side__quick card">
+          <a href={`tel:${clinic.phoneE164}`}><Icon name="phone" /> {clinic.phoneDisplay}</a>
+          <a href={whatsappLink(`Hello, I would like to know more about ${t.title}.`)} target="_blank" rel="noopener">
+            <Icon name="whatsapp" /> Ask on WhatsApp
+          </a>
+          <span><Icon name="clock" /> {clinic.hours.label}</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="section section--ice">
+        <div class="wrap">
+          <div class="section-head section-head--split">
+            <div>
+              <p class="eyebrow">Related</p>
+              <h2>More {category.title.toLowerCase()}</h2>
+            </div>
+            <a class="link-arrow" href={`/${category.slug}/`}>
+              All {category.title.toLowerCase()}
+            </a>
+          </div>
+          <div class="grid grid--3">
+            {related.map((r) => (
+              <TreatmentCard treatment={r} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .indications {
+    margin-top: 24px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .indications__label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  .side {
+    position: sticky;
+    top: calc(var(--header-h) + 20px);
+    display: grid;
+    gap: 16px;
+  }
+
+  .side__quick {
+    display: grid;
+    gap: 12px;
+    padding: 20px 24px;
+    font-size: 0.95rem;
+  }
+
+  .side__quick a,
+  .side__quick span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--navy-900);
+    font-weight: 700;
+  }
+
+  .side__quick span {
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+
+  .side__quick svg {
+    color: var(--gold);
+  }
+
+  .detail__h {
+    font-size: var(--step-2);
+  }
+
+  .facts {
+    margin: 8px 0 32px;
+    border-top: 1px solid var(--line);
+  }
+
+  .fact {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 8px 32px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fact dt {
+    font-weight: 700;
+    color: var(--navy-900);
+  }
+
+  .fact dt::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    transform: translateY(-1px);
+  }
+
+  .fact dd {
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 600px) {
+    .fact {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .extra {
+    margin: 40px 0;
+  }
+
+  .extra h2,
+  .detail__faq h2 {
+    font-size: var(--step-2);
+  }
+
+  .extra__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .extra__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: var(--ice-50);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    color: var(--navy-900);
+  }
+
+  .extra__list svg {
+    color: var(--gold-600);
+  }
+
+  .consult {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 16px;
+    padding: 24px;
+    margin: 32px 0 48px;
+    background: var(--ice-50);
+    border-color: var(--line);
+    box-shadow: none;
+  }
+
+  .consult svg {
+    color: var(--navy);
+  }
+
+  .consult p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 980px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+
+    .side {
+      position: static;
+    }
+  }
+</style>

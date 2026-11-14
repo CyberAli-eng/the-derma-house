@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { concerns } from '../data/content';
+---
+
+<Base title="Page not found" description="The page you are looking for has moved. Explore our treatments or book a consultation." noindex>
+  <section class="section">
+    <div class="wrap nf">
+      <p class="eyebrow">Error 404</p>
+      <h1>This page has moved.</h1>
+      <p class="lede">We rebuilt our website. Try one of these popular treatments, or browse everything we offer.</p>
+      <ul class="chips">
+        {concerns.map((c) => <li><a class="chip" href={c.href}>{c.label}</a></li>)}
+      </ul>
+      <div class="nf__actions">
+        <a class="btn" href="/treatments/">All treatments</a>
+        <a class="btn btn--ghost" href="/">Home</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    max-width: 760px;
+  }
+
+  .nf__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+  }
+</style>

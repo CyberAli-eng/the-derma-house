@@ -1,0 +1,220 @@
+---
+// Booking form with no backend: validates in the browser, then opens WhatsApp
+// with a pre-filled message to the clinic. Nothing is stored on a server.
+// To collect leads server-side instead, point `data-endpoint` at a form service.
+import Icon from './Icon.astro';
+import { categories } from '../data/categories';
+import { clinic } from '../data/clinic';
+
+interface Props {
+  title?: string;
+  preset?: string;
+  compact?: boolean;
+}
+const { title = 'Book your consultation', preset = '', compact = false } = Astro.props;
+const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<form class:list={['booking card', { 'booking--compact': compact }]} data-booking data-wa={clinic.whatsapp} method="post" action="/book-consultation/" novalidate>
+  <h2 class="booking__title">{title}</h2>
+  <p class="booking__sub">Share your concern and our team will confirm your appointment within 24 hours.</p>
+
+  <div class="field">
+    <label for={`${id}-name`}>Your name</label>
+    <input id={`${id}-name`} name="name" autocomplete="name" required minlength="2" maxlength="80" aria-describedby={`${id}-name-err`} />
+    <p class="field__error" id={`${id}-name-err`} data-error-for="name" hidden>Please enter your name.</p>
+  </div>
+
+  <div class="field">
+    <label for={`${id}-phone`}>Mobile number</label>
+    <input id={`${id}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="10-digit mobile number" aria-describedby={`${id}-phone-err`} />
+    <p class="field__error" id={`${id}-phone-err`} data-error-for="phone" hidden>Enter a valid 10-digit Indian mobile number.</p>
+  </div>
+
+  <div class="field">
+    <label for={`${id}-concern`}>Area of concern</label>
+    <select id={`${id}-concern`} name="concern">
+      <option value="">Not sure yet</option>
+      {categories.map((c) => <option value={c.title} selected={preset === c.title}>{c.title}</option>)}
+      <option value="Hair Transplant" selected={preset === 'Hair Transplant'}>Hair Transplant</option>
+      <option value="Food, Nutrition & Dietetics" selected={preset === 'Food, Nutrition & Dietetics'}>Food, Nutrition &amp; Dietetics</option>
+      {preset && !categories.some((c) => c.title === preset) && preset !== 'Hair Transplant' && preset !== 'Food, Nutrition & Dietetics' && (
+        <option value={preset} selected>{preset}</option>
+      )}
+    </select>
+  </div>
+
+  {
+    !compact && (
+      <div class="field">
+        <label for={`${id}-msg`}>
+          Tell us about your skin, hair or body concern <span class="field__opt">(optional)</span>
+        </label>
+        <textarea id={`${id}-msg`} name="message" rows="3" maxlength="600" />
+      </div>
+    )
+  }
+
+  <noscript>
+    <p class="booking__nojs">
+      Online booking needs JavaScript. Please call <a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a> or
+      <a href={`https://wa.me/${clinic.whatsapp}`}>message us on WhatsApp</a>.
+    </p>
+  </noscript>
+
+  <button class="btn btn--gold booking__submit" type="submit">
+    <Icon name="whatsapp" /> Send request on WhatsApp
+  </button>
+  <p class="booking__note">
+    Prefer to talk? Call <a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a>. By sending, you agree to our
+    <a href="/privacy-policy/">privacy policy</a>.
+  </p>
+</form>
+
+<script>
+  const PHONE = /^(?:\+?91[\s-]?|0)?[6-9]\d{9}$/;
+
+  function setError(form: HTMLFormElement, name: string, show: boolean) {
+    const input = form.elements.namedItem(name) as HTMLInputElement | null;
+    const msg = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+    input?.setAttribute('aria-invalid', String(show));
+    if (msg) msg.hidden = !show;
+  }
+
+  document.querySelectorAll<HTMLFormElement>('[data-booking]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get('name') ?? '').trim();
+      const phone = String(data.get('phone') ?? '').replace(/[\s()-]/g, '');
+      const nameOk = name.length >= 2;
+      const phoneOk = PHONE.test(phone);
+      setError(form, 'name', !nameOk);
+      setError(form, 'phone', !phoneOk);
+      if (!nameOk || !phoneOk) {
+        (form.querySelector('[aria-invalid="true"]') as HTMLElement | null)?.focus();
+        return;
+      }
+
+      const concern = String(data.get('concern') ?? '').trim() || 'Not sure yet';
+      const message = String(data.get('message') ?? '').trim();
+      const text = [
+        'Hello The Derma House, I would like to book a consultation.',
+        `Name: ${name}`,
+        `Mobile: ${phone}`,
+        `Concern: ${concern}`,
+        message ? `Details: ${message}` : '',
+      ]
+        .filter(Boolean)
+        .join('\n');
+
+      const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(text)}`;
+      // Keep the pre-filled link so /thank-you/ can offer it again if WhatsApp did not open
+      // (popup blockers, Instagram/Facebook in-app browsers).
+      try {
+        sessionStorage.setItem('tdh-booking-wa', url);
+      } catch {
+        /* storage unavailable: thank-you page falls back to a plain WhatsApp link */
+      }
+      if (window.matchMedia('(pointer: coarse)').matches) {
+        window.location.href = url;
+        return;
+      }
+      window.open(url, '_blank', 'noopener');
+      window.location.href = '/thank-you/';
+    });
+  });
+</script>
+
+<style>
+  .booking {
+    padding: clamp(24px, 4vw, 36px);
+    display: grid;
+    gap: 16px;
+  }
+
+  .booking__title {
+    font-size: var(--step-2);
+    margin: 0;
+  }
+
+  .booking__sub {
+    margin: -6px 0 4px;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+
+  .field label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--navy-900);
+  }
+
+  .field__opt {
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #c3d3dd;
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    font: inherit;
+    color: var(--ink);
+  }
+
+  .field textarea {
+    resize: vertical;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+    border-color: var(--gold);
+  }
+
+  .field [aria-invalid='true'] {
+    border-color: var(--danger);
+  }
+
+  .field__error {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--danger);
+  }
+
+  .booking__submit {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  html:not(.js) .booking .field,
+  html:not(.js) .booking__submit {
+    display: none;
+  }
+
+  .booking__nojs {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--ice-50);
+  }
+
+  .booking__note {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--ink-3);
+  }
+</style>

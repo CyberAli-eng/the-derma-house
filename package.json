@@ -1,0 +1,22 @@
+{
+  "name": "the-derma-house",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Derma House, Kaithal: rebuilt clinic website (Astro, static).",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:links": "node scripts/check-links.mjs",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "7.4.12"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^26.6.6",
+    "typescript": "^6.0.3"
+  }
+}

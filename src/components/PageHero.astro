@@ -1,0 +1,118 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  title: string;
+  eyebrow?: string;
+  lede?: string;
+  crumbs?: Crumb[];
+  image?: string;
+  imageAlt?: string;
+}
+const { title, eyebrow, lede, crumbs = [], image, imageAlt = '' } = Astro.props;
+---
+
+<section class:list={['phero', { 'phero--img': image }]}>
+  <div class="wrap phero__inner">
+    <div class="phero__text">
+      {
+        crumbs.length > 0 && (
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              {crumbs.map((c) => (
+                <li>{c.href ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}</li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {lede && <p class="lede">{lede}</p>}
+      <slot />
+    </div>
+    {
+      image && (
+        <div class="phero__media">
+          <img src={image} alt={imageAlt} width="560" height="640" fetchpriority="high" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .phero {
+    padding-block: clamp(40px, 6vw, 80px);
+    background: linear-gradient(180deg, var(--ice-50), var(--paper));
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .phero__inner {
+    display: grid;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .phero--img .phero__inner {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .phero h1 {
+    font-size: clamp(2.3rem, 1.8rem + 2.4vw, 3.8rem);
+  }
+
+  .phero__media img {
+    width: 100%;
+    aspect-ratio: 7 / 8;
+    max-height: 460px;
+    object-fit: cover;
+    border-radius: var(--arch);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-right: 6px;
+    color: var(--line);
+  }
+
+  .crumbs a {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .crumbs a:hover {
+    color: var(--gold-600);
+  }
+
+  @media (max-width: 860px) {
+    .phero--img .phero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .phero__media {
+      max-width: 420px;
+    }
+
+    .phero__media img {
+      max-height: 340px;
+    }
+  }
+</style>

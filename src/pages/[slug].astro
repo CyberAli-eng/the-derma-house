@@ -1,0 +1,19 @@
+---
+// Generates every category and treatment page at the same root-level URLs
+// the old WordPress site used (e.g. /acne/, /laser-treatments/), so existing
+// Google rankings and backlinks keep working.
+import CategoryView from '../components/CategoryView.astro';
+import TreatmentView from '../components/TreatmentView.astro';
+import { categories, treatments } from '../data/categories';
+
+export function getStaticPaths() {
+  return [
+    ...categories.map((c) => ({ params: { slug: c.slug }, props: { kind: 'category' as const, slug: c.slug } })),
+    ...treatments.map((t) => ({ params: { slug: t.slug }, props: { kind: 'treatment' as const, slug: t.slug } })),
+  ];
+}
+
+const { kind, slug } = Astro.props;
+---
+
+{kind === 'category' ? <CategoryView slug={slug} /> : <TreatmentView slug={slug} />}

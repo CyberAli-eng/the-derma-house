@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import TreatmentCard from '../components/TreatmentCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { categories, treatments, categoryBySlug } from '../data/categories';
+---
+
+<Base
+  title="All Skin, Laser & Hair Treatments"
+  description={`Browse all ${treatments.length} skin, laser, hair, anti-ageing, permanent makeup and derma-surgical treatments at The Derma House, Kaithal.`}
+>
+  <PageHero
+    title="All treatments"
+    eyebrow={`${treatments.length} treatments, 7 specialities`}
+    lede="Find the right treatment for your skin, hair or body concern. Not sure where to start? Book a consultation and our dermatologist will guide you."
+    crumbs={[{ label: 'Treatments' }]}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Filter treatments by speciality">
+        <button class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+        {categories.map((c) => <button class="chip" data-filter={c.slug} aria-pressed="false">{c.title}</button>)}
+      </div>
+      <h2 class="visually-hidden">Treatment list</h2>
+      <p class="count" aria-live="polite" data-count>{treatments.length} treatments</p>
+      <div class="grid grid--3" data-grid>
+        {treatments.map((t) => <TreatmentCard treatment={t} showCategory={categoryBySlug(t.category)?.title} />)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-grid] [data-category]');
+  const count = document.querySelector<HTMLElement>('[data-count]');
+
+  function apply(filter: string) {
+    let shown = 0;
+    cards.forEach((card) => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      card.hidden = !match;
+      if (match) {
+        shown += 1;
+        card.classList.add('is-in');
+      }
+    });
+    buttons.forEach((b) => {
+      const active = b.dataset.filter === filter;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-pressed', String(active));
+    });
+    if (count) count.textContent = `${shown} treatment${shown === 1 ? '' : 's'}`;
+  }
+
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? 'all')));
+  const initial = new URLSearchParams(location.search).get('category');
+  if (initial && [...buttons].some((b) => b.dataset.filter === initial)) apply(initial);
+</script>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .filters .chip {
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.95rem;
+  }
+
+  .filters .chip.is-active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+
+  .count {
+    color: var(--ink-3);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+</style>

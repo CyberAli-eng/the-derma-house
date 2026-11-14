@@ -1,0 +1,1413 @@
+[
+  {
+    "slug": "acne",
+    "title": "Acne",
+    "category": "skin-treatments",
+    "summary": "A common skin condition that causes pimples, blackheads and whiteheads.",
+    "sections": [
+      {
+        "heading": "What is Acne?",
+        "body": "A common skin condition that causes pimples, blackheads and whiteheads."
+      },
+      {
+        "heading": "Causes",
+        "body": "Clogged pores due to oil, dead skin cells and bacteria."
+      },
+      {
+        "heading": "Treatment",
+        "body": "Over-the-counter products, prescription creams or oral medications."
+      },
+      {
+        "heading": "Management",
+        "body": "Gentle skincare routine and avoiding picking at the skin."
+      }
+    ],
+    "indications": [
+      "Acne vulgaris",
+      "Cystic acne",
+      "Hormonal acne"
+    ],
+    "faq": [
+      {
+        "q": "What causes acne?",
+        "a": "Acne is caused by clogged pores, bacteria, excess oil production, hormonal imbalances, and sometimes lifestyle or dietary factors."
+      },
+      {
+        "q": "What treatments do you offer for acne?",
+        "a": "At Derma House Clinic, we offer medicated treatments, chemical peels, laser therapy, acne facials, and advanced skin care regimens customized to your skin type."
+      },
+      {
+        "q": "How long does it take to see results?",
+        "a": "Most patients start seeing visible improvements within 4 to 6 weeks, depending on the treatment plan and skin condition."
+      },
+      {
+        "q": "Are the treatments painful?",
+        "a": "Most acne treatments are minimally invasive and cause little to no discomfort. Our experts ensure your comfort throughout the procedure."
+      },
+      {
+        "q": "Can acne scars be treated?",
+        "a": "Yes! We offer specialized treatments like laser resurfacing, micro-needling, and chemical peels to effectively reduce acne scars."
+      }
+    ]
+  },
+  {
+    "slug": "allergy",
+    "title": "Allergy",
+    "category": "skin-treatments",
+    "summary": "An overreaction of the immune system to substances like pollen, dust or certain foods.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "An overreaction of the immune system to substances like pollen, dust or certain foods."
+      },
+      {
+        "heading": "Symptoms",
+        "body": "Itching, redness, swelling, hives or rash."
+      },
+      {
+        "heading": "Treatment",
+        "body": "Avoid triggers, use antihistamines and apply topical creams."
+      },
+      {
+        "heading": "When to see a doctor",
+        "body": "If symptoms persist or are severe."
+      }
+    ],
+    "indications": [
+      "Contact dermatitis",
+      "Eczema",
+      "Atopic dermatitis"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "hyperhidrosis",
+    "title": "Hyperhidrosis",
+    "category": "skin-treatments",
+    "summary": "Excessive sweating beyond normal levels.",
+    "sections": [
+      {
+        "heading": "What is Hyperhidrosis?",
+        "body": "Excessive sweating beyond normal levels."
+      },
+      {
+        "heading": "Symptoms",
+        "body": "Persistent sweating, especially on the palms, feet, underarms or face."
+      },
+      {
+        "heading": "Treatment",
+        "body": "Antiperspirants, Botox injections or prescription medications."
+      },
+      {
+        "heading": "When to see a doctor",
+        "body": "If sweating affects daily life or causes distress."
+      }
+    ],
+    "indications": [
+      "Excessive sweating (palms",
+      "soles",
+      "axillae)"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "pigmentation",
+    "title": "Pigmentation",
+    "category": "skin-treatments",
+    "summary": "Dark or light spots on the skin due to excess or lack of melanin.",
+    "sections": [
+      {
+        "heading": "What is Pigmentation?",
+        "body": "Dark or light spots on the skin due to excess or lack of melanin."
+      },
+      {
+        "heading": "Causes",
+        "body": "Sun exposure, aging, hormonal changes or inflammation."
+      },
+      {
+        "heading": "Treatment",
+        "body": "Topical creams, chemical peels or laser therapy to lighten spots."
+      },
+      {
+        "heading": "Prevention",
+        "body": "Regular use of sunscreen and avoiding direct sun exposure."
+      }
+    ],
+    "indications": [
+      "Melasma",
+      "Sunspots",
+      "Post-inflammatory hyperpigmentation"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "psoriasis",
+    "title": "Psoriasis",
+    "category": "skin-treatments",
+    "summary": "A chronic skin condition causing red, scaly patches.",
+    "sections": [
+      {
+        "heading": "What is Psoriasis?",
+        "body": "A chronic skin condition causing red, scaly patches."
+      },
+      {
+        "heading": "Symptoms",
+        "body": "Thick, silvery scales on the skin, often on the elbows, knees and scalp."
+      },
+      {
+        "heading": "Treatment",
+        "body": "Topical creams, light therapy and medications to reduce inflammation."
+      },
+      {
+        "heading": "Management",
+        "body": "Regular moisturizing and avoiding triggers like stress."
+      }
+    ],
+    "indications": [
+      "Chronic plaque psoriasis",
+      "Scalp psoriasis"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "urticaria",
+    "title": "Urticaria",
+    "category": "skin-treatments",
+    "summary": "Also known as hives, it's a skin reaction causing itchy wheals.",
+    "sections": [
+      {
+        "heading": "What is Urticaria?",
+        "body": "Also known as hives, it's a skin reaction causing itchy wheals."
+      },
+      {
+        "heading": "Symptoms",
+        "body": "Red, raised and itchy welts on the skin that can vary in size."
+      },
+      {
+        "heading": "Treatment",
+        "body": "Antihistamines, avoiding triggers and using soothing creams."
+      },
+      {
+        "heading": "When to see a doctor",
+        "body": "If hives last more than a few days or cause difficulty breathing."
+      }
+    ],
+    "indications": [
+      "Hives",
+      "Chronic idiopathic urticaria"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "vitiligo",
+    "title": "Vitiligo",
+    "category": "skin-treatments",
+    "summary": "A condition where the skin loses its pigment, leading to white patches.",
+    "sections": [
+      {
+        "heading": "What is Vitiligo?",
+        "body": "A condition where the skin loses its pigment, leading to white patches."
+      },
+      {
+        "heading": "Symptoms",
+        "body": "White patches of skin, often on the face, hands and other exposed areas."
+      },
+      {
+        "heading": "Treatment",
+        "body": "Topical creams, light therapy and sometimes skin camouflage or depigmentation therapy."
+      },
+      {
+        "heading": "Management",
+        "body": "Sun protection and regular skin monitoring."
+      }
+    ],
+    "indications": [
+      "Autoimmune depigmentation",
+      "White patches"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "excimer-laser",
+    "title": "Excimer Laser",
+    "category": "laser-treatments",
+    "summary": "A laser treatment used primarily for skin conditions like psoriasis and vitiligo.",
+    "sections": [
+      {
+        "heading": "What is Laser Excimer?",
+        "body": "A laser treatment used primarily for skin conditions like psoriasis and vitiligo."
+      },
+      {
+        "heading": "How it works",
+        "body": "The laser emits a targeted UV light to treat affected skin areas."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Multiple sessions needed depending on the condition."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Improves skin condition by reducing inflammation and promoting repigmentation."
+      },
+      {
+        "heading": "Safety",
+        "body": "Generally safe with minimal side effects, such as temporary redness."
+      }
+    ],
+    "indications": [
+      "Psoriasis",
+      "Vitiligo",
+      "Localized eczema"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "intense-pulsed-light-ipl",
+    "title": "Intense Pulsed Light (IPL)",
+    "category": "laser-treatments",
+    "summary": "A light-based treatment used for various skin issues, including redness, age spots and hair removal.",
+    "sections": [
+      {
+        "heading": "What is IPL?",
+        "body": "A light-based treatment used for various skin issues, including redness, age spots and hair removal."
+      },
+      {
+        "heading": "How it works",
+        "body": "IPL emits broad-spectrum light to target pigment and blood vessels beneath the skin."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Reduces pigmentation, evens skin tone, treats rosacea and can be used for hair reduction."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Requires multiple sessions for best results."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with minimal side effects, such as temporary redness or swelling."
+      }
+    ],
+    "indications": [
+      "Rosacea",
+      "Sun damage",
+      "Pigmentation",
+      "Vascular lesions"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "laser-hair-reduction",
+    "title": "Laser Hair Reduction",
+    "category": "laser-treatments",
+    "summary": "A treatment that uses laser light to reduce unwanted hair growth.",
+    "sections": [
+      {
+        "heading": "What is Laser Hair Reduction?",
+        "body": "A treatment that uses laser light to reduce unwanted hair growth."
+      },
+      {
+        "heading": "How it works",
+        "body": "The laser targets hair follicles, damaging them to prevent future growth."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Long-term reduction in hair growth, smoother skin and fewer ingrown hairs."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Multiple sessions needed for best results."
+      },
+      {
+        "heading": "Safety",
+        "body": "Generally safe with minimal side effects like temporary redness."
+      }
+    ],
+    "indications": [
+      "Unwanted hair growth",
+      "Hirsutism",
+      "PCOS-related hair growth"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "laser-scar-removal",
+    "title": "Laser Scar Removal",
+    "category": "laser-treatments",
+    "summary": "A procedure that uses laser energy to improve the appearance of scars.",
+    "sections": [
+      {
+        "heading": "What is Laser Scar Removal?",
+        "body": "A procedure that uses laser energy to improve the appearance of scars."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Can significantly reduce the visibility of scars, including acne and surgical scars."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "May require several sessions for optimal results."
+      },
+      {
+        "heading": "How it works",
+        "body": "The laser resurfaces the skin or stimulates collagen production to smooth and lighten scars."
+      },
+      {
+        "heading": "Safety",
+        "body": "Minimal downtime, with potential for temporary redness or swelling."
+      }
+    ],
+    "indications": [
+      "Acne scars",
+      "Surgical scars",
+      "Burn scars"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "laser-skin-tightening-hifu",
+    "title": "Laser Skin Tightening (HIFU)",
+    "category": "laser-treatments",
+    "summary": "High-Intensity Focused Ultrasound (HIFU) uses ultrasound energy to tighten and lift the skin.",
+    "sections": [
+      {
+        "heading": "What is HIFU?",
+        "body": "High-Intensity Focused Ultrasound (HIFU) uses ultrasound energy to tighten and lift the skin."
+      },
+      {
+        "heading": "How it works",
+        "body": "HIFU targets deeper layers of skin to stimulate collagen production, leading to firmer skin."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Non-surgical face lifting, improved skin elasticity and reduced wrinkles."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Often requires one session, with gradual improvement over months."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with minimal discomfort and no downtime."
+      }
+    ],
+    "indications": [
+      "Loose skin",
+      "Wrinkles",
+      "Sagging facial contours"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "laser-for-pigmentation-tattoo-removal-birth-mark",
+    "title": "Laser for Pigmentation/Tattoo Removal/Birth Mark",
+    "category": "laser-treatments",
+    "summary": "Laser treatment to reduce pigmentation, remove tattoos or lighten birthmarks.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Laser treatment to reduce pigmentation, remove tattoos or lighten birthmarks."
+      },
+      {
+        "heading": "How it works",
+        "body": "The laser breaks down pigment in the skin, allowing the body to naturally remove it."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Effective in fading unwanted tattoos, dark spots or birthmarks over time."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Multiple sessions may be necessary, depending on the pigment depth."
+      },
+      {
+        "heading": "Safety",
+        "body": "Non-invasive with possible temporary redness or lightening."
+      }
+    ],
+    "indications": [
+      "Hyperpigmentation",
+      "Melasma",
+      "Freckles",
+      "Birthmarks",
+      "Unwanted tattoos"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "excessive-hair-loss",
+    "title": "Excessive Hair Loss",
+    "category": "hair-treatments",
+    "summary": "Noticeable hair thinning or bald spots.",
+    "sections": [
+      {
+        "heading": "What is Excessive Hair Loss?",
+        "body": "Noticeable hair thinning or bald spots."
+      },
+      {
+        "heading": "Common Causes",
+        "body": "Stress, hormonal changes, genetics, poor nutrition or underlying health issues."
+      },
+      {
+        "heading": "Self-Care Tips",
+        "body": "Maintain a healthy diet, reduce stress and avoid harsh hair treatments."
+      },
+      {
+        "heading": "Over-the-counter Options",
+        "body": "Consider Minoxidil (Rogaine) for promoting hair regrowth."
+      },
+      {
+        "heading": "When to see a doctor",
+        "body": "If hair loss is sudden, severe or accompanied by other symptoms."
+      }
+    ],
+    "indications": [
+      "Androgenetic alopecia",
+      "Telogen effluvium",
+      "Alopecia areata"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "gfc-prp-for-hair-growth",
+    "title": "GFC/PRP for Hair Growth",
+    "category": "hair-treatments",
+    "summary": "Growth Factor Concentrate (GFC) or Platelet-Rich Plasma (PRP) therapy involves using your blood’s growth factors to stimulate hair growth.",
+    "sections": [
+      {
+        "heading": "What is GFC/PRP?",
+        "body": "Growth Factor Concentrate (GFC) or Platelet-Rich Plasma (PRP) therapy involves using your blood’s growth factors to stimulate hair growth."
+      },
+      {
+        "heading": "How it works",
+        "body": "A small amount of your blood is processed to concentrate growth factors, then injected into the scalp."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Can improve hair density, reduce hair loss and promote natural hair growth."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Usually requires multiple sessions for optimal results."
+      },
+      {
+        "heading": "Safety",
+        "body": "Minimally invasive with low risk of side effects."
+      }
+    ],
+    "indications": [
+      "Hair thinning",
+      "Early-stage hair loss",
+      "Post-hair transplant support"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "hair-transplant",
+    "title": "Hair Transplant",
+    "category": "hair-treatments",
+    "summary": "A surgical procedure where hair follicles are removed from a donor area (usually the back of the head) to thinning or bald areas.",
+    "sections": [
+      {
+        "heading": "What is Hair Transplant?",
+        "body": "A surgical procedure where hair follicles are removed from a donor area (usually the back of the head) to thinning or bald areas."
+      },
+      {
+        "heading": "How it works",
+        "body": "Hair follicles are carefully transplanted to mimic natural hair growth."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Provides a permanent solution to hair loss with natural-looking results."
+      },
+      {
+        "heading": "Recovery",
+        "body": "Some downtime required with full results visible within 6-12 months."
+      },
+      {
+        "heading": "Who it is for",
+        "body": "Ideal for those with significant hair loss who are suitable candidates for surgery."
+      }
+    ],
+    "indications": [
+      "Advanced male & female pattern baldness",
+      "Traction alopecia"
+    ],
+    "faq": [
+      {
+        "q": "How long does a Hair Transplant last?",
+        "a": "The results of a hair transplant are permanent because the transplanted hair follows the natural growth cycle and does not fall out again."
+      },
+      {
+        "q": "Is a Hair Transplant painful?",
+        "a": "The procedure is performed under local anesthesia, so it is almost pain-free. Patients may feel mild discomfort only during the healing phase."
+      },
+      {
+        "q": "How long is the recovery time after a Hair Transplant?",
+        "a": "Usually, the scalp heals within 7–10 days, and patients can return to their normal routine quickly."
+      },
+      {
+        "q": "Do I need additional treatments after a Hair Transplant?",
+        "a": "Some patients choose advanced treatments like Laser Therapy or PRP to improve scalp health and achieve faster, better results."
+      },
+      {
+        "q": "When will new hair start growing after a Hair Transplant?",
+        "a": "Some patients choose advanced treatments like Laser Therapy or PRP to improve scalp health and achieve faster, better results."
+      }
+    ]
+  },
+  {
+    "slug": "mesotherapy-for-hair-growth",
+    "title": "Mesotherapy for Hair Growth",
+    "category": "hair-treatments",
+    "summary": "A treatment involving microinjections of vitamins, minerals and amino acids into the scalp.",
+    "sections": [
+      {
+        "heading": "What is Mesotherapy?",
+        "body": "A treatment involving microinjections of vitamins, minerals and amino acids into the scalp."
+      },
+      {
+        "heading": "How it works",
+        "body": "Nourishes hair follicles, stimulates blood circulation and promotes hair growth."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Can help strengthen hair, reduce hair loss and improve scalp health."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Typically requires multiple sessions with gradual improvement over time."
+      },
+      {
+        "heading": "Safety",
+        "body": "Generally safe with minimal discomfort."
+      }
+    ],
+    "indications": [
+      "Hair fall",
+      "Weak hair follicles",
+      "Scalp nourishment"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "scalp-micropigmentation",
+    "title": "Scalp Micropigmentation",
+    "category": "hair-treatments",
+    "summary": "A non-surgical treatment that uses tiny, tattooed dots to create the appearance of fuller hair or a shaved head.",
+    "sections": [
+      {
+        "heading": "What is Scalp Micropigmentation?",
+        "body": "A non-surgical treatment that uses tiny, tattooed dots to create the appearance of fuller hair or a shaved head."
+      },
+      {
+        "heading": "How it works",
+        "body": "Pigment is applied to the scalp to replicate the look of hair follicles."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Creates the illusion of thicker hair or a buzz cut and can conceal scars."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Usually requires a few sessions to achieve the desired look."
+      },
+      {
+        "heading": "Safety",
+        "body": "Non-invasive with minimal risks and no downtime."
+      }
+    ],
+    "indications": [
+      "Camouflage bald spots",
+      "Post-transplant enhancement"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "botox",
+    "title": "Botox",
+    "category": "anti-ageing-treatments",
+    "summary": "An injectable treatment that relaxes muscles to reduce wrinkles.",
+    "sections": [
+      {
+        "heading": "What is Botox?",
+        "body": "An injectable treatment that relaxes muscles to reduce wrinkles."
+      },
+      {
+        "heading": "How it works",
+        "body": "Botox temporarily blocks nerve signals, softening lines and wrinkles."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Smooths forehead lines, crow’s feet and frown lines."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Quick procedure with results lasting 3-6 months."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with minimal side effects, such as slight bruising."
+      }
+    ],
+    "indications": [
+      "Wrinkles",
+      "Forehead lines",
+      "Crow’s feet",
+      "Frown lines"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "cellulite-treatment-non-surgical-fat-reduction",
+    "title": "Cellulite Treatment (Non-Surgical Fat Reduction)",
+    "category": "anti-ageing-treatments",
+    "summary": "Treatments aimed at reducing the appearance of cellulite and fat without surgery.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Treatments aimed at reducing the appearance of cellulite and fat without surgery."
+      },
+      {
+        "heading": "How it works",
+        "body": "Techniques like radiofrequency, laser or ultrasound break down fat cells and improve skin texture."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Smoother skin, reduced cellulite and firmer body contours."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Multiple sessions needed for best results."
+      },
+      {
+        "heading": "Safety",
+        "body": "Non-invasive with minimal side effects like temporary redness."
+      }
+    ],
+    "indications": [
+      "Stubborn fat deposits",
+      "Cellulite"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "fillers",
+    "title": "Fillers",
+    "category": "anti-ageing-treatments",
+    "summary": "Injectable gels used to restore volume and smooth wrinkles.",
+    "sections": [
+      {
+        "heading": "What is Fillers?",
+        "body": "Injectable gels used to restore volume and smooth wrinkles."
+      },
+      {
+        "heading": "How it works",
+        "body": "Fillers plump areas like lips, cheeks and under-eye hollows."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Restores youthful fullness, smooths wrinkles and enhances facial features."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Instant results lasting 6-18 months, depending on the filler."
+      },
+      {
+        "heading": "Safety",
+        "body": "Minimal downtime with possible temporary swelling or bruising."
+      }
+    ],
+    "indications": [
+      "Volume loss",
+      "Deep wrinkles",
+      "Lip augmentation",
+      "Cheek enhancement"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "microneedling-radiofrequency",
+    "title": "Microneedling Radiofrequency",
+    "category": "anti-ageing-treatments",
+    "summary": "A treatment combining microneedling with radiofrequency energy.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "A treatment combining microneedling with radiofrequency energy."
+      },
+      {
+        "heading": "How it works",
+        "body": "Microneedles deliver radiofrequency deep into the skin, boosting collagen and tightening."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Reduces wrinkles, scars and improves skin texture."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Multiple sessions needed for best results."
+      },
+      {
+        "heading": "Safety",
+        "body": "Minimal downtime with temporary redness or swelling."
+      }
+    ],
+    "indications": [
+      "Fine lines",
+      "Acne scars",
+      "Large pores",
+      "Skin rejuvenation"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "non-surgical-eyebrow-lift",
+    "title": "Non Surgical Eyebrow Lift",
+    "category": "anti-ageing-treatments",
+    "summary": "A treatment to lift and shape the eyebrows without surgery.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "A treatment to lift and shape the eyebrows without surgery."
+      },
+      {
+        "heading": "How it works",
+        "body": "Techniques like Botox, HIFU or thread lifts raise the brow area."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Opens up the eye area, creating a more youthful and rested look."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Quick procedure with results lasting several months."
+      },
+      {
+        "heading": "Safety",
+        "body": "Non-invasive with minimal side effects."
+      }
+    ],
+    "indications": [
+      "Drooping brows",
+      "Hooded eyelids"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "non-surgical-face-lift",
+    "title": "Non-Surgical Face Lift",
+    "category": "anti-ageing-treatments",
+    "summary": "A treatment that lifts and tightens the skin without surgery.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "A treatment that lifts and tightens the skin without surgery."
+      },
+      {
+        "heading": "How it works",
+        "body": "Techniques like HIFU or radiofrequency stimulate collagen, firming the skin."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Improves sagging, reduces wrinkles and enhances facial contours."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Usually one session, with gradual results over months."
+      },
+      {
+        "heading": "Safety",
+        "body": "Non-invasive with minimal downtime."
+      }
+    ],
+    "indications": [
+      "Skin laxity",
+      "Wrinkles",
+      "Mild jowls"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "profhilo",
+    "title": "Profhilo",
+    "category": "anti-ageing-treatments",
+    "summary": "An injectable treatment that hydrates and firms the skin.",
+    "sections": [
+      {
+        "heading": "What is Profhilo?",
+        "body": "An injectable treatment that hydrates and firms the skin."
+      },
+      {
+        "heading": "How it works",
+        "body": "Contains high concentrations of hyaluronic acid to boost skin hydration and stimulate collagen."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Improves skin elasticity, hydration and smoothness."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Two sessions recommended with results lasting up to 6 months."
+      },
+      {
+        "heading": "Safety",
+        "body": "Minimal downtime with possible mild swelling or bruising."
+      }
+    ],
+    "indications": [
+      "Skin hydration",
+      "Fine lines",
+      "Bioremodelling"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "skin-boosters",
+    "title": "Skin Boosters",
+    "category": "anti-ageing-treatments",
+    "summary": "Injectable treatments that deeply hydrate the skin.",
+    "sections": [
+      {
+        "heading": "What is Skin Boosters?",
+        "body": "Injectable treatments that deeply hydrate the skin."
+      },
+      {
+        "heading": "How it works",
+        "body": "Hyaluronic acid-based injectables are used to improve skin texture and elasticity."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Plumps, hydrates and smooths the skin, giving a radiant glow."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Multiple sessions may be required with long-lasting results."
+      },
+      {
+        "heading": "Safety",
+        "body": "Minimal downtime with temporary redness or swelling."
+      }
+    ],
+    "indications": [
+      "Dehydrated skin",
+      "Dull complexion"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "threadlift",
+    "title": "Threadlift",
+    "category": "anti-ageing-treatments",
+    "summary": "A minimally invasive treatment that lifts and tightens the skin using dissolvable threads.",
+    "sections": [
+      {
+        "heading": "What is Threadlift?",
+        "body": "A minimally invasive treatment that lifts and tightens the skin using dissolvable threads."
+      },
+      {
+        "heading": "How it works",
+        "body": "Threads are inserted under the skin to lift sagging areas and stimulate collagen."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Immediate lifting effect with gradual skin tightening over time."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Quick procedure with results lasting 1-2 years."
+      },
+      {
+        "heading": "Safety",
+        "body": "Minimal recovery time with slight bruising or swelling possible."
+      }
+    ],
+    "indications": [
+      "Sagging skin",
+      "Non-surgical facelift"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "chemical-peel",
+    "title": "Chemical Peel",
+    "category": "chemical-peel-medifacials",
+    "summary": "A skin treatment that exfoliates and renews the skin using a chemical solution.",
+    "sections": [
+      {
+        "heading": "What is Chemical Peel?",
+        "body": "A skin treatment that exfoliates and renews the skin using a chemical solution."
+      },
+      {
+        "heading": "How it works",
+        "body": "The solution removes the outer layer of skin, revealing smoother, brighter skin underneath."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Reduces fine lines, acne scars, dark spots and uneven texture for a more youthful appearance."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Quick procedure with results visible after a few days."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with some temporary redness or peeling; follow post-treatment care for best results."
+      }
+    ],
+    "indications": [
+      "Acne",
+      "Pigmentation",
+      "Uneven skin tone",
+      "Fine lines"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "medifacials",
+    "title": "Medifacials",
+    "category": "chemical-peel-medifacials",
+    "summary": "Customized facials that combine medical-grade products and techniques to target specific skin concerns.",
+    "sections": [
+      {
+        "heading": "What is Medifacials?",
+        "body": "Customized facials that combine medical-grade products and techniques to target specific skin concerns."
+      },
+      {
+        "heading": "How it works",
+        "body": "Involves deep cleansing, exfoliation and application of serums tailored to your skin type and needs."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Hydrates, brightens and rejuvenates the skin, addressing issues like acne, pigmentation and aging."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Typically lasts 60-90 minutes with immediate results."
+      },
+      {
+        "heading": "Safety",
+        "body": "Non-invasive with no downtime; safe for all skin types."
+      }
+    ],
+    "indications": [
+      "Skin hydration",
+      "Glow enhancement",
+      "Anti-aging"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "bb-glow",
+    "title": "BB Glow",
+    "category": "permanent-makeup",
+    "summary": "A semi-permanent treatment that gives your skin a radiant, even-toned glow.",
+    "sections": [
+      {
+        "heading": "What is BB Glow?",
+        "body": "A semi-permanent treatment that gives your skin a radiant, even-toned glow."
+      },
+      {
+        "heading": "How it works",
+        "body": "A tinted serum with nourishing ingredients is applied using microneedling to create a foundation-like effect."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Smooths skin tone, reduces the appearance of blemishes and dark spots and provides a natural glow."
+      },
+      {
+        "heading": "Longevity",
+        "body": "Results last several months with multiple sessions recommended."
+      },
+      {
+        "heading": "Safety",
+        "body": "Generally safe with minimal downtime, possible temporary redness."
+      }
+    ],
+    "indications": [
+      "Uneven skin tone",
+      "Dull complexion"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "lip-blush",
+    "title": "Lip Blush",
+    "category": "permanent-makeup",
+    "summary": "A semi-permanent cosmetic tattoo that enhances the color and shape of your lips.",
+    "sections": [
+      {
+        "heading": "What is Lip Blush?",
+        "body": "A semi-permanent cosmetic tattoo that enhances the color and shape of your lips."
+      },
+      {
+        "heading": "How it works",
+        "body": "A soft tint is applied to the lips to enhance natural color and create the appearance of fuller lips."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Natural-looking, long-lasting color that enhances lip shape and reduces the need for lipstick."
+      },
+      {
+        "heading": "Longevity",
+        "body": "Results last 1-2 years, with touch-ups recommended."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe procedure with minimal downtime and possible temporary swelling."
+      }
+    ],
+    "indications": [
+      "Pale lips",
+      "uneven lip pigmentation. Safe procedure with minimal downtime and possible temporary swelling"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "microblading-powder-brows",
+    "title": "Microblading / Powder Brows",
+    "category": "permanent-makeup",
+    "summary": "Semi-permanent makeup techniques to enhance the appearance of eyebrows.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Semi-permanent makeup techniques to enhance the appearance of eyebrows."
+      },
+      {
+        "heading": "How it works",
+        "body": "Microblading uses fine strokes to mimic natural hairs, while powder brows create a soft, shaded effect."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Fuller, more defined brows that look natural and save time on daily makeup."
+      },
+      {
+        "heading": "Longevity",
+        "body": "Results last 1-2 years, with touch-ups needed."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with proper aftercare, minimal downtime."
+      }
+    ],
+    "indications": [
+      "Sparse eyebrows",
+      "Uneven brows"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "circumcision",
+    "title": "Circumcision",
+    "category": "derma-surgical-treatments",
+    "summary": "Surgical removal of the foreskin from the penis.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Surgical removal of the foreskin from the penis."
+      },
+      {
+        "heading": "How it works",
+        "body": "Performed under local or general anesthesia, removing the foreskin."
+      },
+      {
+        "heading": "Benefits",
+        "body": "May reduce the risk of certain infections and improve hygiene."
+      },
+      {
+        "heading": "Safety",
+        "body": "Common procedure with low risk of complications."
+      }
+    ],
+    "indications": [
+      "Phimosis",
+      "Religious/cultural reasons"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "corn-removal",
+    "title": "Corn Removal",
+    "category": "derma-surgical-treatments",
+    "summary": "Treatment to remove thickened skin (corns) on the feet caused by friction or pressure.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Treatment to remove thickened skin (corns) on the feet caused by friction or pressure."
+      },
+      {
+        "heading": "How it works",
+        "body": "Corns are carefully trimmed or treated with medicated pads to reduce discomfort."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Relieves pain and prevents recurrence with proper footwear."
+      },
+      {
+        "heading": "Treatment duration",
+        "body": "Simple procedure with minimal discomfort."
+      }
+    ],
+    "indications": [
+      "Painful corns on feet"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "cyst-removal-mole-removal",
+    "title": "Cyst & Mole Removal",
+    "category": "derma-surgical-treatments",
+    "summary": "Surgical removal of cysts or moles from the skin.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Surgical removal of cysts or moles from the skin."
+      },
+      {
+        "heading": "How it works",
+        "body": "Cysts and moles are excised under local anesthesia."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Prevents potential complications and improves cosmetic appearance."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with minimal scarring and quick recovery."
+      }
+    ],
+    "indications": [
+      "Sebaceous cysts",
+      "Unwanted moles"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "ear-lobe-repair",
+    "title": "Ear Lobe Repair",
+    "category": "derma-surgical-treatments",
+    "summary": "Surgery to repair torn or stretched earlobes.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Surgery to repair torn or stretched earlobes."
+      },
+      {
+        "heading": "How it works",
+        "body": "The earlobe is reshaped and sutured to restore its appearance."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Restores the earlobe's shape, allowing earrings to be worn again."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe procedure with minimal discomfort."
+      }
+    ],
+    "indications": [
+      "Torn/stretched ear lobes"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "ingrown-nail-surgery",
+    "title": "Ingrown Nail Surgery",
+    "category": "derma-surgical-treatments",
+    "summary": "Surgical correction of a nail that grows into the surrounding skin, causing pain and infection.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Surgical correction of a nail that grows into the surrounding skin, causing pain and infection."
+      },
+      {
+        "heading": "How it works",
+        "body": "The ingrown part of the nail is removed, sometimes along with part of the nail bed."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Relieves pain and prevents recurrence."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with minimal downtime and fast relief."
+      }
+    ],
+    "indications": [
+      "Painful ingrown toenails",
+      "Recurrent infections"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "lipoma-excision",
+    "title": "Lipoma Excision",
+    "category": "derma-surgical-treatments",
+    "summary": "Removal of a benign fatty lump (lipoma) from under the skin.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Removal of a benign fatty lump (lipoma) from under the skin."
+      },
+      {
+        "heading": "How it works",
+        "body": "Lipomas are excised through a small incision under local anesthesia."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Removes the lump and prevents discomfort."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe procedure with minimal scarring and quick recovery."
+      }
+    ],
+    "indications": [
+      "Benign fatty tumors"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "scar-revision",
+    "title": "Scar Revision",
+    "category": "derma-surgical-treatments",
+    "summary": "A procedure to improve the appearance of a scar.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "A procedure to improve the appearance of a scar."
+      },
+      {
+        "heading": "How it works",
+        "body": "Techniques vary, including surgical removal, laser therapy or injections to reduce the scar's visibility."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Makes scars less noticeable and improves skin texture."
+      },
+      {
+        "heading": "Safety",
+        "body": "Generally safe with potential for minimal scarring."
+      }
+    ],
+    "indications": [
+      "Keloid/hypertrophic scars",
+      "Post-surgical scars"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "skin-tag-removal",
+    "title": "Skin Tag Removal",
+    "category": "derma-surgical-treatments",
+    "summary": "Removal of small, benign growths of skin (skin tags).",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Removal of small, benign growths of skin (skin tags)."
+      },
+      {
+        "heading": "How it works",
+        "body": "Skin tags are snipped off, frozen or treated with laser."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Quick removal with minimal discomfort."
+      },
+      {
+        "heading": "Safety",
+        "body": "Simple, safe procedure with minimal scarring."
+      }
+    ],
+    "indications": [
+      "Cosmetic concerns",
+      "Friction irritation"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "vitiligo-surgery",
+    "title": "Vitiligo Surgery",
+    "category": "derma-surgical-treatments",
+    "summary": "Surgical treatment to restore skin color in vitiligo-affected areas.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Surgical treatment to restore skin color in vitiligo-affected areas."
+      },
+      {
+        "heading": "How it works",
+        "body": "Techniques like skin grafting or melanocyte transplant are used to repigment white patches."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Restores a more even skin tone."
+      },
+      {
+        "heading": "Safety",
+        "body": "Effective for stable vitiligo with minimal side effects."
+      }
+    ],
+    "indications": [
+      "Stable vitiligo patches"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "wart-removal",
+    "title": "Wart Removal",
+    "category": "derma-surgical-treatments",
+    "summary": "Treatment to remove viral warts from the skin.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Treatment to remove viral warts from the skin."
+      },
+      {
+        "heading": "How it works",
+        "body": "Methods include cryotherapy (freezing), laser or excision."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Removes unsightly warts and prevents spreading."
+      },
+      {
+        "heading": "Safety",
+        "body": "Effective with low risk of scarring."
+      }
+    ],
+    "indications": [
+      "Viral warts",
+      "Genital warts"
+    ],
+    "faq": []
+  },
+  {
+    "slug": "xanthelasma-excision",
+    "title": "Xanthelasma Excision",
+    "category": "derma-surgical-treatments",
+    "summary": "Removal of yellowish cholesterol deposits around the eyes.",
+    "sections": [
+      {
+        "heading": "What is it?",
+        "body": "Removal of yellowish cholesterol deposits around the eyes."
+      },
+      {
+        "heading": "How it works",
+        "body": "Excision or laser treatment to remove the deposits."
+      },
+      {
+        "heading": "Benefits",
+        "body": "Improves cosmetic appearance and prevents recurrence."
+      },
+      {
+        "heading": "Safety",
+        "body": "Safe with minimal downtime and scarring."
+      }
+    ],
+    "indications": [
+      "Cholesterol deposits around the eyes"
+    ],
+    "faq": []
+  }
+]

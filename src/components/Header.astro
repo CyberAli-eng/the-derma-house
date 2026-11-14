@@ -1,0 +1,420 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { clinic, whatsappLink } from '../data/clinic';
+import { categories, treatmentsIn } from '../data/categories';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const links = [
+  { href: '/about/', label: 'About' },
+  { href: '/case-studies/', label: 'Results' },
+  { href: '/food-nutrition/', label: 'Nutrition' },
+  { href: '/contact-us/', label: 'Contact' },
+];
+---
+
+<div class="topbar">
+  <div class="wrap topbar__inner">
+    <span><Icon name="clock" size={15} /> {clinic.hours.label}</span>
+    <span class="topbar__addr"><Icon name="pin" size={15} /> Opp. SBI Bank, Karnal Road, Kaithal</span>
+    <a href={`tel:${clinic.phoneE164}`}><Icon name="phone" size={15} /> {clinic.phoneDisplay}</a>
+  </div>
+</div>
+
+<header class="header" data-header>
+  <div class="wrap header__inner">
+    <Logo />
+
+    <nav class="nav" id="mobile-nav" aria-label="Main" data-nav>
+      <ul class="nav__list">
+        <li class="nav__item nav__item--mega">
+          <button class="nav__link nav__trigger" aria-expanded="false" aria-controls="mega" data-mega-trigger>
+            Treatments <Icon name="chevron" size={16} />
+          </button>
+          <div class="mega" id="mega" data-mega>
+            <div class="mega__grid">
+              {
+                categories.map((c) => (
+                  <div class="mega__col">
+                    <a class="mega__title" href={`/${c.slug}/`}>{c.title}</a>
+                    <ul>
+                      {treatmentsIn(c.slug)
+                        .slice(0, 6)
+                        .map((t) => (
+                          <li>
+                            <a href={`/${t.slug}/`}>{t.title}</a>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                ))
+              }
+            </div>
+            <div class="mega__foot">
+              <a class="link-arrow" href="/treatments/">See all 43 treatments</a>
+              <a class="link-arrow" href="/food-nutrition/">Food, nutrition &amp; dietetics</a>
+            </div>
+          </div>
+        </li>
+        {
+          links.map((l) => (
+            <li class="nav__item">
+              <a class="nav__link" href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="nav__mobile-cta">
+        <a class="btn" href="/book-consultation/"><Icon name="calendar" /> Book consultation</a>
+        <a class="btn btn--ghost" href={whatsappLink()} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp us</a>
+      </div>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__phone" href={`tel:${clinic.phoneE164}`} aria-label={`Call ${clinic.phoneDisplay}`}>
+        <Icon name="phone" />
+      </a>
+      <a class="btn header__cta" href="/book-consultation/">Book consultation</a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" data-menu>
+        <Icon name="menu" size={24} />
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu]');
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const megaBtn = document.querySelector<HTMLButtonElement>('[data-mega-trigger]');
+
+  const megaItem = megaBtn?.parentElement;
+
+  function setMenu(open: boolean) {
+    if (!menuBtn) return;
+    if (header) document.documentElement.style.setProperty('--nav-top', `${header.getBoundingClientRect().bottom}px`);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    nav?.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+  }
+
+  function closeMega(returnFocus = false) {
+    if (!megaBtn || megaBtn.getAttribute('aria-expanded') !== 'true') return;
+    const hadFocus = megaItem?.contains(document.activeElement) && document.activeElement !== megaBtn;
+    megaBtn.setAttribute('aria-expanded', 'false');
+    if (returnFocus && hadFocus) megaBtn.focus();
+  }
+
+  menuBtn?.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+
+  megaBtn?.addEventListener('click', () => {
+    const open = megaBtn.getAttribute('aria-expanded') !== 'true';
+    megaBtn.setAttribute('aria-expanded', String(open));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    closeMega(true);
+    if (menuBtn?.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      menuBtn.focus();
+    }
+  });
+
+  megaItem?.addEventListener('focusout', (e) => {
+    const next = (e as FocusEvent).relatedTarget as Node | null;
+    if (next && !megaItem.contains(next)) closeMega();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (megaItem && !megaItem.contains(e.target as Node)) closeMega();
+  });
+
+  window.matchMedia('(min-width: 1081px)').addEventListener('change', (e) => {
+    if (e.matches) setMenu(false);
+  });
+
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<style>
+  .topbar {
+    background: var(--navy-950);
+    color: #b9cdda;
+    font-size: 0.82rem;
+  }
+
+  .topbar__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 8px;
+  }
+
+  .topbar span,
+  .topbar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .topbar a:hover {
+    color: var(--gold-soft);
+  }
+
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    /* No backdrop-filter on the header itself: it would become the containing
+       block for the fixed mobile nav and collapse it. The blur lives on ::before. */
+    isolation: isolate;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(251 250 246 / 0.92);
+    backdrop-filter: saturate(1.4) blur(12px);
+  }
+
+  .header.is-scrolled {
+    border-color: var(--line);
+    box-shadow: 0 6px 20px rgb(0 36 58 / 0.06);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: var(--header-h);
+  }
+
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 14px;
+    border: 0;
+    background: none;
+    font: 700 0.95rem var(--font-body);
+    color: var(--navy-900);
+    text-decoration: none;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .nav__link:hover,
+  .nav__link[aria-current='page'] {
+    color: var(--gold-600);
+  }
+
+  .nav__trigger svg {
+    transition: transform 0.2s ease;
+  }
+
+  .nav__trigger[aria-expanded='true'] svg {
+    transform: rotate(180deg);
+  }
+
+  .nav__item--mega {
+    position: static;
+  }
+
+  .mega {
+    position: absolute;
+    left: 50%;
+    top: calc(100% - 6px);
+    width: min(100vw - 2 * var(--gutter), var(--wrap));
+    transform: translateX(-50%);
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: none;
+  }
+
+  [aria-expanded='true'] + .mega {
+    display: block;
+  }
+
+  .mega__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px 28px;
+  }
+
+  .mega__title {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--navy-900);
+    text-decoration: none;
+    margin-bottom: 8px;
+  }
+
+  .mega ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  .mega li a {
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .mega li a:hover {
+    color: var(--gold-600);
+  }
+
+  .mega__foot {
+    display: flex;
+    gap: 28px;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header__phone {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    color: var(--navy);
+  }
+
+  .menu-btn {
+    display: none;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 0;
+    background: none;
+    color: var(--navy-900);
+    cursor: pointer;
+  }
+
+  .nav__mobile-cta {
+    display: none;
+  }
+
+  @media (max-width: 1080px) {
+    .topbar .topbar__addr {
+      display: none;
+    }
+
+    .menu-btn {
+      display: grid;
+    }
+
+    .header__cta {
+      display: none;
+    }
+
+    .nav {
+      position: fixed;
+      inset: var(--nav-top, var(--header-h)) 0 0 0;
+      background: var(--paper);
+      padding: 16px var(--gutter) 40px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .nav.is-open {
+      display: block;
+    }
+
+    .nav__list {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .nav__link {
+      width: 100%;
+      justify-content: space-between;
+      padding: 16px 4px;
+      font-size: 1.1rem;
+      border-radius: 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .mega {
+      position: static;
+      transform: none;
+      width: auto;
+      padding: 8px 0 16px;
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .mega__grid {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .mega ul,
+    .mega__foot {
+      display: none;
+    }
+
+    .mega__title {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 400;
+      padding: 6px 12px;
+    }
+
+    .nav__mobile-cta {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .topbar__inner span:first-child {
+      display: none;
+    }
+
+    .topbar__inner {
+      justify-content: center;
+    }
+  }
+</style>

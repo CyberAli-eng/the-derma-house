@@ -1,0 +1,770 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import BookingForm from '../components/BookingForm.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { categories, treatments, treatmentsIn, img } from '../data/categories';
+import { clinic, fullAddress, whatsappLink } from '../data/clinic';
+import { concerns, process, testimonials, homeFaq, nutritionist, benefits } from '../data/content';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+
+<Base
+  title="The Derma House | Dermatologist & Skin Clinic in Kaithal"
+  description="Dr. Aanchal S. Kakkar's The Derma House in Kaithal offers expert skin, laser, hair and anti-ageing treatments with personalised plans. Book a consultation today."
+  schema={[faqSchema]}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div class="hero__text">
+        <p class="eyebrow">Dermatology &amp; aesthetics · Kaithal</p>
+        <h1>Glow every day with <em>renewed</em> confidence.</h1>
+        <p class="lede">
+          Expert skin and hair care from certified dermatologists. Tell us your concern, from acne and pigmentation to
+          hair fall and ageing, and get a treatment plan made for you.
+        </p>
+        <div class="hero__actions">
+          <a class="btn" href="/book-consultation/"><Icon name="calendar" /> Book consultation</a>
+          <a class="btn btn--ghost" href={`tel:${clinic.phoneE164}`}><Icon name="phone" /> {clinic.phoneDisplay}</a>
+        </div>
+        <ul class="hero__trust">
+          <li><Icon name="shield" /> Certified dermatologists</li>
+          <li><Icon name="spark" /> FDA-approved technology</li>
+          <li><Icon name="video" /> Online consultations</li>
+        </ul>
+      </div>
+      <div class="hero__media">
+        <img
+          src={img.unsplash('1552693673-1bf958298935', 900)}
+          alt="Dermatologist performing a gentle facial treatment"
+          width="560"
+          height="680"
+          fetchpriority="high"
+        />
+        <div class="hero__card hero__card--top">
+          <strong>{treatments.length}</strong>
+          <span>treatments across skin, laser, hair &amp; aesthetics</span>
+        </div>
+        <div class="hero__card hero__card--bottom">
+          <Icon name="clock" />
+          <span><strong>Reply within 24 hours</strong>{clinic.hours.label}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCERNS -->
+  <section class="concerns">
+    <div class="wrap concerns__inner">
+      <h2 class="concerns__title">What would you like to treat?</h2>
+      <ul class="chips">
+        {concerns.map((c) => <li><a class="chip" href={c.href}>{c.label}</a></li>)}
+        <li><a class="chip chip--all" href="/treatments/">All treatments →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">Our treatments</p>
+          <h2>Personalised care, advanced techniques, visible results.</h2>
+        </div>
+        <a class="link-arrow" href="/treatments/">Browse all treatments</a>
+      </div>
+      <div class="cats">
+        {
+          categories.map((c, i) => (
+            <a class:list={['cat reveal', { 'cat--wide': i === 0 }]} href={`/${c.slug}/`}>
+              <img src={c.image.replace('w=1200', 'w=700')} alt="" width="600" height="420" loading="lazy" />
+              <span class="cat__body">
+                <span class="cat__count">{treatmentsIn(c.slug).length} treatments</span>
+                <span class="cat__title">{c.title}</span>
+                <span class="cat__short">{c.short}</span>
+              </span>
+            </a>
+          ))
+        }
+        <a class="cat cat--text cat--wide reveal" href="/hair-transplant/">
+          <span class="cat__body">
+            <span class="cat__count">Hair restoration</span>
+            <span class="cat__title">Hair Transplant</span>
+            <span class="cat__short">Male, female, beard and eyebrow transplants with natural-looking, permanent results.</span>
+            <span class="link-arrow">Learn more</span>
+          </span>
+        </a>
+        <a class="cat cat--wide reveal" href="/food-nutrition/">
+          <img src={img.nutrition.replace('w=1200', 'w=900')} alt="" width="600" height="420" loading="lazy" />
+          <span class="cat__body">
+            <span class="cat__count">Clinical nutrition</span>
+            <span class="cat__title">Food, Nutrition &amp; Dietetics</span>
+            <span class="cat__short">Personalised diet plans for healthy skin, hair and weight with Dt. Maheep Dhaliwal.</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section section--navy process">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>From first conversation to lasting results.</h2>
+      </div>
+      <ol class="steps">
+        {
+          process.map((s, i) => (
+            <li class="step reveal">
+              <span class="step__num">0{i + 1}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section">
+    <div class="wrap why">
+      <div class="why__media reveal">
+        <img src={img.unsplash('1560750588-73207b1ef5b8', 900)} alt="Calm treatment lounge with soft natural light" width="560" height="640" loading="lazy" />
+      </div>
+      <div>
+        <p class="eyebrow">Why The Derma House</p>
+        <h2>Root-cause care from a team that knows your skin.</h2>
+        <p class="lede">
+          Dr. Aanchal S. Kakkar’s clinic brings dermatology, lasers, aesthetics and nutrition under one roof in Kaithal, so
+          your plan covers the whole picture.
+        </p>
+        <ul class="benefits">
+          {
+            benefits.map((b) => (
+              <li>
+                <span class="benefits__icon"><Icon name="check" size={18} /></span>
+                <div>
+                  <h3>{b.title}</h3>
+                  <p>{b.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="link-arrow" href="/about/">More about the clinic</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section--ice">
+    <div class="wrap">
+      <div class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">Patient stories</p>
+          <h2>What our patients say.</h2>
+        </div>
+        <a class="link-arrow" href="/case-studies/">See results &amp; case studies</a>
+      </div>
+      <div class="quotes" tabindex="0" aria-label="Patient testimonials">
+        {
+          testimonials.map((t) => (
+            <figure class="quote card">
+              <div class="quote__stars" aria-label="5 out of 5">
+                {[1, 2, 3, 4, 5].map(() => <Icon name="star" size={16} />)}
+              </div>
+              <blockquote>“{t.quote}”</blockquote>
+              <figcaption>
+                <strong>{t.name}</strong>
+                <span>{t.treatment}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- NUTRITION -->
+  <section class="section">
+    <div class="wrap nutri">
+      <div class="nutri__text">
+        <p class="eyebrow">Meet our clinical nutritionist</p>
+        <h2>{nutritionist.name}</h2>
+        <p class="nutri__role">{nutritionist.qualification} · {nutritionist.role}</p>
+        <p>{nutritionist.bio}</p>
+        <div class="hero__actions">
+          <a class="btn" href="/food-nutrition/">Nutrition &amp; dietetics</a>
+          <a class="btn btn--ghost" href={whatsappLink('Hello, I would like to book a nutrition consultation.')} target="_blank" rel="noopener">Book a nutrition consult</a>
+        </div>
+      </div>
+      <div class="nutri__media reveal">
+        <img src={img.nutrition.replace('w=1200', 'w=800')} alt="Colourful balanced meal bowl with vegetables and chickpeas" width="560" height="460" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ + BOOKING -->
+  <section class="section section--ice" id="book">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Need help?</p>
+        <h2>Frequently asked questions</h2>
+        <FaqList items={homeFaq} />
+      </div>
+      <BookingForm />
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="section visit">
+    <div class="wrap visit__inner">
+      <div>
+        <p class="eyebrow">Visit the clinic</p>
+        <h2>Opposite SBI Bank, Karnal Road, Kaithal.</h2>
+        <ul class="visit__list">
+          <li><Icon name="pin" /><a href={clinic.mapsLink} target="_blank" rel="noopener">{fullAddress}</a></li>
+          <li><Icon name="clock" /><span>{clinic.hours.label} · {clinic.hours.note}</span></li>
+          <li><Icon name="phone" /><a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a></li>
+          <li><Icon name="mail" /><a href={`mailto:${clinic.email}`}>{clinic.email}</a></li>
+        </ul>
+        <a class="btn btn--ghost" href={clinic.mapsLink} target="_blank" rel="noopener">Get directions</a>
+      </div>
+      <iframe
+        class="visit__map"
+        title="Map showing The Derma House, Karnal Road, Kaithal"
+        src={clinic.mapsEmbed}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(40px, 6vw, 88px) clamp(48px, 7vw, 96px);
+    background:
+      radial-gradient(60% 70% at 85% 30%, var(--ice) 0%, transparent 70%),
+      var(--paper);
+    overflow: hidden;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-600);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    list-style: none;
+    padding: 0;
+    margin: 32px 0 0;
+    font-size: 0.92rem;
+    color: var(--ink-2);
+  }
+
+  .hero__trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero__trust svg {
+    color: var(--gold);
+  }
+
+  .hero__media {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 460px);
+  }
+
+  .hero__media img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--arch);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hero__media::before {
+    content: '';
+    position: absolute;
+    inset: -14px -14px 14px 14px;
+    border: 1px solid var(--gold);
+    border-radius: var(--arch);
+    z-index: -1;
+  }
+
+  .hero__card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 230px;
+    padding: 14px 18px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: var(--ink-2);
+  }
+
+  .hero__card strong {
+    display: block;
+    color: var(--navy-900);
+  }
+
+  .hero__card--top {
+    top: 18%;
+    left: -48px;
+  }
+
+  .hero__card--top strong {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+
+  .hero__card--bottom {
+    bottom: 8%;
+    right: -28px;
+  }
+
+  .hero__card--bottom svg {
+    color: var(--gold);
+    flex: none;
+  }
+
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__card--top {
+      left: -8px;
+    }
+
+    .hero__card--bottom {
+      right: -8px;
+    }
+  }
+
+  .concerns {
+    border-block: 1px solid var(--line-soft);
+    background: var(--white);
+    padding-block: 28px;
+  }
+
+  .concerns__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 32px;
+  }
+
+  .concerns__title {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .chip--all {
+    border-color: var(--navy);
+    font-weight: 700;
+  }
+
+  .cats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .cat {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    color: var(--white);
+    text-decoration: none;
+    background: var(--navy);
+    isolation: isolate;
+  }
+
+  .cat--wide {
+    grid-column: span 2;
+  }
+
+  .cat img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    transition: transform 0.6s ease;
+  }
+
+  .cat::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 26 43 / 0) 30%, rgb(0 26 43 / 0.88) 100%);
+    z-index: -1;
+  }
+
+  .cat:hover img {
+    transform: scale(1.05);
+  }
+
+  .cat:hover {
+    color: var(--white);
+  }
+
+  .cat__body {
+    margin-top: auto;
+    display: grid;
+    gap: 4px;
+    padding: 24px;
+  }
+
+  .cat__count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  .cat__title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .cat__short {
+    font-size: 0.92rem;
+    color: #d7e4ec;
+  }
+
+  .cat--text {
+    background: var(--gold-soft);
+    color: var(--navy-900);
+  }
+
+  .cat--text::after {
+    display: none;
+  }
+
+  .cat--text:hover {
+    color: var(--navy-900);
+  }
+
+  .cat--text .cat__count {
+    color: var(--gold-600);
+  }
+
+  .cat--text .cat__short {
+    color: var(--ink-2);
+  }
+
+  .cat--text .link-arrow {
+    margin-top: 10px;
+  }
+
+  @media (max-width: 1000px) {
+    .cats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cat--wide {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .cats {
+      grid-template-columns: 1fr;
+    }
+
+    .cat--wide {
+      grid-column: auto;
+    }
+
+    .cat {
+      min-height: 260px;
+    }
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .step {
+    padding: 28px;
+    border: 1px solid #1d4d6a;
+    border-radius: var(--radius-lg);
+    background: rgb(255 255 255 / 0.03);
+  }
+
+  .step__num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .step p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 960px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .why {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .why__media img {
+    width: 100%;
+    aspect-ratio: 7 / 8;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  .benefits {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .benefits li {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+  }
+
+  .benefits__icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--gold-soft);
+    color: var(--gold-600);
+  }
+
+  .benefits h3 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+  }
+
+  .benefits p {
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 900px) {
+    .why {
+      grid-template-columns: 1fr;
+    }
+
+    .why__media {
+      max-width: 460px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .benefits {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .quotes {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(300px, 1fr);
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+
+  .quote {
+    scroll-snap-align: start;
+    margin: 0;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .quote__stars {
+    display: flex;
+    gap: 2px;
+    color: var(--gold);
+  }
+
+  .quote__stars :global(svg) {
+    fill: currentColor;
+  }
+
+  .quote blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.35;
+    color: var(--navy-900);
+  }
+
+  .quote figcaption {
+    margin-top: auto;
+    display: grid;
+    font-size: 0.9rem;
+    color: var(--ink-3);
+  }
+
+  .quote figcaption strong {
+    color: var(--navy-900);
+  }
+
+  .nutri {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .nutri__role {
+    font-weight: 700;
+    color: var(--gold-600);
+  }
+
+  .nutri__media img {
+    width: 100%;
+    aspect-ratio: 6 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  @media (max-width: 900px) {
+    .nutri {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .visit__inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .visit__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .visit__list li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px;
+    color: var(--ink-2);
+  }
+
+  .visit__list svg {
+    color: var(--gold);
+    margin-top: 3px;
+  }
+
+  .visit__map {
+    width: 100%;
+    min-height: 380px;
+    border: 0;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    background: var(--ice);
+  }
+
+  @media (max-width: 900px) {
+    .visit__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

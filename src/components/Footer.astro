@@ -1,0 +1,166 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { clinic, fullAddress, whatsappLink } from '../data/clinic';
+import { categories } from '../data/categories';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <Logo tone="light" />
+      <p>
+        Advanced skin, laser and hair transplant care in Kaithal, operated by {clinic.legalName}. Personalised
+        treatment plans from certified dermatologists.
+      </p>
+      <div class="footer__social">
+        <a href={clinic.social.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>
+        <a href={clinic.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" /></a>
+        <a href={whatsappLink()} target="_blank" rel="noopener" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
+      </div>
+    </div>
+
+    <nav aria-label="Treatments">
+      <h2 class="footer__h">Treatments</h2>
+      <ul>
+        {categories.map((c) => <li><a href={`/${c.slug}/`}>{c.title}</a></li>)}
+        <li><a href="/hair-transplant/">Hair Transplant</a></li>
+        <li><a href="/food-nutrition/">Food, Nutrition &amp; Dietetics</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Clinic">
+      <h2 class="footer__h">Clinic</h2>
+      <ul>
+        <li><a href="/about/">About us</a></li>
+        <li><a href="/case-studies/">Results &amp; case studies</a></li>
+        <li><a href="/book-consultation/">Book a consultation</a></li>
+        <li><a href="/contact-us/">Contact</a></li>
+        <li><a href="/terms-of-service/">Terms of service</a></li>
+        <li><a href="/privacy-policy/">Privacy policy</a></li>
+        <li><a href="/refund-return-policy/">Refund policy</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="footer__h">Visit</h2>
+      <ul class="footer__contact">
+        <li><Icon name="pin" size={18} /><a href={clinic.mapsLink} target="_blank" rel="noopener">{fullAddress}</a></li>
+        <li><Icon name="clock" size={18} /><span>{clinic.hours.label}<br />{clinic.hours.note}</span></li>
+        <li><Icon name="phone" size={18} /><a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a></li>
+        <li><Icon name="mail" size={18} /><a href={`mailto:${clinic.email}`}>{clinic.email}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer__base">
+    <p>© {year} {clinic.name}. All rights reserved.</p>
+    <p>Information on this site is general and does not replace a consultation with a dermatologist.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--navy-950);
+    color: #a9c0cf;
+    padding-top: clamp(56px, 8vw, 96px);
+    font-size: 0.95rem;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+    gap: 40px;
+  }
+
+  @media (max-width: 960px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footer__brand p {
+    margin-top: 20px;
+    max-width: 36ch;
+  }
+
+  .footer__h {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 16px;
+  }
+
+  .footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .footer a {
+    color: #d3e1ea;
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    color: var(--gold-soft);
+  }
+
+  .footer__contact li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .footer__contact svg {
+    margin-top: 4px;
+    color: var(--gold);
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer__social a {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #23465c;
+    border-radius: 50%;
+  }
+
+  .footer__base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-top: 56px;
+    padding-block: 24px 96px;
+    border-top: 1px solid #12354a;
+    font-size: 0.85rem;
+  }
+
+  .footer__base p {
+    margin: 0;
+  }
+
+  @media (min-width: 1081px) {
+    .footer__base {
+      padding-bottom: 28px;
+    }
+  }
+</style>
