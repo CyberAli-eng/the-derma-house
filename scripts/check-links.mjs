@@ -4,6 +4,9 @@ import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 
 const DIST = new URL('../dist/', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
+// When built for a sub-path (BASE_PATH=/repo), links carry that prefix; strip it to find the file.
+const BASE = (process.env.BASE_PATH ?? '').trim().replace(/^\/+|\/+$/g, '');
+const unbase = (href) => (BASE && (href === `/${BASE}` || href.startsWith(`/${BASE}/`)) ? href.slice(BASE.length + 1) || '/' : href);
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -23,7 +26,7 @@ async function exists(path) {
 }
 
 function targetFile(href) {
-  const clean = decodeURIComponent(href.split('#')[0].split('?')[0]);
+  const clean = decodeURIComponent(unbase(href).split('#')[0].split('?')[0]);
   if (clean === '' || clean === '/') return join(DIST, 'index.html');
   if (/\.[a-z0-9]+$/i.test(clean)) return join(DIST, clean);
   return join(DIST, clean, 'index.html');
@@ -41,9 +44,10 @@ for (const file of files) {
   const refresh = html.match(/http-equiv="refresh" content="0;url=([^"]+)"/);
   if (refresh) refs.push(refresh[1]);
   for (const ref of refs) {
-    if (ref.startsWith('//') || ref.startsWith('/_astro/')) continue;
+    if (ref.startsWith('//') || unbase(ref).startsWith('/_astro/')) continue;
     checked += 1;
-    if (!(await exists(targetFile(ref)))) broken.push(`${page} -> ${ref}`);
+    if (BASE && !(ref === `/${BASE}` || ref.startsWith(`/${BASE}/`))) broken.push(`${page} -> ${ref} (missing /${BASE} prefix)`);
+    else if (!(await exists(targetFile(ref)))) broken.push(`${page} -> ${ref}`);
     const path = ref.split('#')[0].split('?')[0];
     if (path && !path.endsWith('/') && !/\.[a-z0-9]+$/i.test(path)) missingSlash.push(`${page} -> ${ref}`);
   }

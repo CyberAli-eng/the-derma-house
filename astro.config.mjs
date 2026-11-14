@@ -1,6 +1,7 @@
 // @ts-check
 import { writeFile } from 'node:fs/promises';
 import { defineConfig } from 'astro/config';
+import { basePath } from './scripts/base-path.mjs';
 
 // Old WordPress URLs that were duplicates, typos, thin landing pages or test pages.
 // Each one now points to its single canonical page.
@@ -48,5 +49,5 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory' },
   redirects,
-  integrations: [hostRedirects],
+  integrations: [hostRedirects, basePath()],
 });

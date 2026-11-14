@@ -15,7 +15,7 @@ const { title = 'Book your consultation', preset = '', compact = false } = Astro
 const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<form class:list={['booking', { 'booking--compact': compact }]} data-booking data-wa={clinic.whatsapp} method="post" action="/book-consultation/" novalidate>
+<form class:list={['booking', { 'booking--compact': compact }]} data-booking data-wa={clinic.whatsapp} data-thanks="/thank-you/" method="post" action="/book-consultation/" novalidate>
   <h2 class="booking__title">{title}</h2>
   <p class="booking__sub">We reply within 24 hours to confirm a time.</p>
 
@@ -121,7 +121,7 @@ const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
         return;
       }
       window.open(url, '_blank', 'noopener');
-      window.location.href = '/thank-you/';
+      window.location.href = form.dataset.thanks ?? '/thank-you/';
     });
   });
 </script>
