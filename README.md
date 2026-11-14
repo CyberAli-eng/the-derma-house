@@ -9,6 +9,10 @@ A fast, static rebuild of [dermahouseclinic.com](https://dermahouseclinic.com) f
 ## Docs
 - [docs/01-site-audit.md](docs/01-site-audit.md): reverse-engineering audit of the old site, with 24 bugs and issues, extracted colours, content inventory and a brand scorecard
 - [docs/02-brand-context.md](docs/02-brand-context.md): brand context, messaging, voice, visual identity and the three template references
+- [docs/03-copy-audit.md](docs/03-copy-audit.md): every line that read as AI-generated and what replaced it
+
+## Design
+Redesigned with the Hallmark skill (`.hallmark/` holds its log; the stamp is at the top of `src/styles/global.css`). The clinic's own crest logo and photographs come from dermahouseclinic.com (`public/images/`). Tokens: `src/styles/tokens.css`.
 
 ## Run it
 
@@ -27,7 +31,7 @@ npm run check:links  # fails if any internal link or redirect is broken
 | Categories, images, treatment helpers | `src/data/categories.ts` |
 | All 43 treatments (copied from the old site) | `src/data/treatments.json` |
 | Testimonials, FAQs, process, nutritionist, case studies | `src/data/content.ts` |
-| Design tokens (colours, type, spacing) | `src/styles/global.css` |
+| Design tokens (colours, type, spacing) | `src/styles/tokens.css` |
 | Old-URL redirects | `astro.config.mjs` |
 
 To add a treatment, add an entry to `treatments.json` with an existing `category` slug. Its page, card, sitemap entry and structured data are generated automatically.
@@ -37,8 +41,9 @@ The form validates name and Indian mobile number, then opens WhatsApp to +91 790
 
 ## Before going live (needs the clinic)
 - [ ] Dr. Aanchal S. Kakkar's qualifications and medical registration number for an About/doctor section
-- [ ] Replace Unsplash placeholder photos with the clinic's own photos and consented before/after images
-- [ ] Vector logo (drop in `public/logo.svg` and swap `src/components/Logo.astro`)
+- [ ] Confirm the clinic is happy to reuse its published before/after photos, and add more
+- [ ] Confirm the five testimonials are real patients (they read as generic; see docs/03-copy-audit.md)
+- [ ] A vector or 2x logo file (the current crest PNG is 500px wide)
 - [ ] Confirm "FDA-approved equipment" and "certified dermatologists" claims
 - [ ] Legal review of privacy and terms (updated from HIPAA/GDPR to India's DPDP Act 2023, placeholders filled)
 - [ ] Fix the Google Business Profile address to match the website

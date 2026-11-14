@@ -11,17 +11,16 @@ import { categories, treatments, categoryBySlug } from '../data/categories';
   description={`Browse all ${treatments.length} skin, laser, hair, anti-ageing, permanent makeup and derma-surgical treatments at The Derma House, Kaithal.`}
 >
   <PageHero
-    title="All treatments"
-    eyebrow={`${treatments.length} treatments, 7 specialities`}
-    lede="Find the right treatment for your skin, hair or body concern. Not sure where to start? Book a consultation and our dermatologist will guide you."
+    title={`All ${treatments.length} treatments`}
+    lede="Filter by speciality, or book a consultation and let the dermatologist decide."
     crumbs={[{ label: 'Treatments' }]}
   />
 
   <section class="section">
-    <div class="wrap">
+    <div class="container">
       <div class="filters" role="group" aria-label="Filter treatments by speciality">
-        <button class="chip is-active" data-filter="all" aria-pressed="true">All</button>
-        {categories.map((c) => <button class="chip" data-filter={c.slug} aria-pressed="false">{c.title}</button>)}
+        <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+        {categories.map((c) => <button type="button" class="chip" data-filter={c.slug} aria-pressed="false">{c.title}</button>)}
       </div>
       <h2 class="visually-hidden">Treatment list</h2>
       <p class="count" aria-live="polite" data-count>{treatments.length} treatments</p>
@@ -66,25 +65,19 @@ import { categories, treatments, categoryBySlug } from '../data/categories';
   .filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .filters .chip {
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.95rem;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
   }
 
   .filters .chip.is-active {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: var(--white);
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
   }
 
   .count {
-    color: var(--ink-3);
-    font-size: 0.9rem;
-    margin-bottom: 24px;
+    margin-bottom: var(--space-xl);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
   }
 </style>

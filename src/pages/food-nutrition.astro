@@ -10,138 +10,131 @@ import { whatsappLink } from '../data/clinic';
 
 <Base
   title="Food, Nutrition & Dietetics"
-  description="Personalised nutrition guidance from Dt. Maheep Dhaliwal, Clinical Nutritionist at The Derma House, Kaithal, for healthy skin, hair, weight and wellness."
-  image={img.nutrition}
+  description="Diet plans from Dt. Maheep Dhaliwal, Clinical Nutritionist at The Derma House, Kaithal, for healthy skin, hair, weight and hormonal health."
+  image={img.nutritionist}
 >
   <PageHero
-    title="Nourish your body. Support your health."
-    eyebrow="Food, nutrition & dietetics"
-    lede="Understand how personalised nutrition can support your skin, hair, weight management and overall wellbeing."
-    crumbs={[{ label: 'Food, Nutrition & Dietetics' }]}
-    image={img.nutrition.replace('w=1200', 'w=800')}
-    imageAlt="Colourful balanced meal bowl"
+    title="Diet plans from Dt. Maheep Dhaliwal"
+    lede={`${nutritionist.qualification}. ${nutritionist.role} at The Derma House.`}
+    crumbs={[{ label: 'Food, Nutrition and Dietetics' }]}
+    image={img.nutritionist}
+    imageAlt="Dt. Maheep Dhaliwal in a white coat at the clinic"
+    imageSize={[900, 1352]}
   >
-    <a class="btn cta" href={whatsappLink('Hello, I would like to book a nutrition consultation with Dt. Maheep Dhaliwal.')} target="_blank" rel="noopener">
-      <Icon name="whatsapp" /> Book a nutrition consult
-    </a>
+    <div class="actions">
+      <a class="btn" href={whatsappLink('Hello, I would like to book a nutrition consultation with Dt. Maheep Dhaliwal.')} target="_blank" rel="noopener">
+        <Icon name="whatsapp" /> Book a nutrition consult
+      </a>
+    </div>
   </PageHero>
 
   <section class="section">
-    <div class="wrap profile">
-      <div class="profile__badge" aria-hidden="true"><Icon name="leaf" size={44} /></div>
-      <div>
-        <p class="eyebrow">Meet our clinical nutritionist</p>
-        <h2>{nutritionist.name}</h2>
-        <p class="role">{nutritionist.qualification} · {nutritionist.role}</p>
-        <p class="lede">{nutritionist.bio}</p>
-        <ul class="chips">
-          <li class="chip">Personalised diet plans</li>
-          <li class="chip">Practical nutrition guidance</li>
-          <li class="chip">Sustainable lifestyle support</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--ice">
-    <div class="wrap">
-      <div class="grid grid--3">
+    <div class="container nutri">
+      <p class="nutri__bio">{nutritionist.bio}</p>
+      <dl class="nutri__rows">
         {
           nutritionTopics.map((t) => (
-            <section class="card topic reveal">
-              <h3>{t.title}</h3>
-              <p>{t.body}</p>
-            </section>
+            <div>
+              <dt>{t.title}</dt>
+              <dd>{t.body}</dd>
+            </div>
           ))
         }
-      </div>
+      </dl>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Nutrition support for</p>
-        <h2>Where nutrition makes a difference</h2>
-      </div>
-      <ul class="support">
-        {nutritionSupport.map((s) => <li><Icon name="check" /> {s}</li>)}
+  <section class="section--s well">
+    <div class="container support">
+      <h2 class="support__h">Plans for</h2>
+      <ul class="support__list">
+        {nutritionSupport.map((s) => <li>{s}</li>)}
       </ul>
     </div>
   </section>
 
-  <CtaBand title="Pair your treatment with the right nutrition." body="Skin and hair respond best when treatment and diet work together. Ask us about a combined plan." />
+  <CtaBand title="Book with the nutritionist" />
 </Base>
 
 <style>
-  .cta {
-    margin-top: 24px;
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
   }
 
-  .profile {
+  :global(.phero__photo img) {
+    object-position: 50% 12%;
+  }
+
+  .nutri {
     display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: clamp(24px, 4vw, 56px);
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: var(--space-3xl);
     align-items: start;
-    max-width: 980px;
   }
 
-  .profile__badge {
-    display: grid;
-    place-items: center;
-    width: 160px;
-    height: 190px;
-    border-radius: var(--arch);
-    background: var(--gold-soft);
-    color: var(--gold-600);
+  .nutri__bio {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    line-height: 1.3;
   }
 
-  .role {
-    font-weight: 700;
-    color: var(--gold-600);
-  }
-
-  .topic {
-    padding: 26px;
-  }
-
-  .topic p {
+  .nutri__rows {
     margin: 0;
-    color: var(--ink-2);
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .nutri__rows div {
+    padding-block: var(--space-lg);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .nutri__rows dt {
+    font-weight: 700;
+  }
+
+  .nutri__rows dd {
+    margin: var(--space-2xs) 0 0;
+    color: var(--color-ink-2);
   }
 
   .support {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-  }
-
-  .support li {
-    display: flex;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    gap: var(--space-lg) var(--gap-columns);
     align-items: center;
-    gap: 12px;
-    padding: 22px;
-    border-radius: var(--radius);
-    background: var(--navy);
-    color: var(--white);
-    font-weight: 700;
   }
 
-  .support svg {
-    color: var(--gold);
+  .support__h {
+    font-size: var(--text-2xl);
   }
 
-  @media (max-width: 640px) {
-    .profile {
-      grid-template-columns: 1fr;
+  .support__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gap-columns);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .support__list li {
+    padding-top: var(--space-sm);
+    border-top: 2px solid var(--color-accent);
+    font-family: var(--font-display);
+    font-size: var(--text-title);
+  }
+
+  @media (max-width: 60rem) {
+    .nutri,
+    .support {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
     }
 
-    .profile__badge {
-      width: 110px;
-      height: 130px;
+    .support__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

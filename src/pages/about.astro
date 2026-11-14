@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import FaqList from '../components/FaqList.astro';
 import CtaBand from '../components/CtaBand.astro';
-import Icon from '../components/Icon.astro';
 import { benefits, aboutFaq } from '../data/content';
 import { categories, img, treatments } from '../data/categories';
 import { clinic } from '../data/clinic';
@@ -11,73 +10,70 @@ import { clinic } from '../data/clinic';
 
 <Base
   title="About The Derma House"
-  description="Dr. Aanchal S. Kakkar's The Derma House is Kaithal's destination for advanced skin, hair, laser and aesthetic care, operated by Kakkar Healthcare."
+  description="Dr. Aanchal S. Kakkar's The Derma House is a skin, laser and hair transplant clinic on Karnal Road, Kaithal, operated by Kakkar Healthcare."
 >
   <PageHero
-    title="Skin, hair and aesthetic care, under one roof."
-    eyebrow="About the clinic"
-    lede="The Derma House is a dermatology and aesthetics clinic in Kaithal, Haryana. We combine expert dermatologists, FDA-approved technology and personalised plans to enhance your natural skin and hair safely."
+    title="A skin clinic on Karnal Road, Kaithal"
+    lede={`Led by ${clinic.founder} and run by ${clinic.legalName}.`}
     crumbs={[{ label: 'About' }]}
-    image={img.interior.replace('w=1400', 'w=800')}
-    imageAlt="Calm, softly lit treatment lounge"
+    image={img.transplant}
+    imageAlt="A hair transplant procedure under way"
+    imageSize={[1280, 670]}
   />
 
   <section class="section">
-    <div class="wrap about">
-      <div>
-        <p class="eyebrow">Our approach</p>
-        <h2>We treat the cause, not just the symptoms.</h2>
-        <p class="lede">
-          Founded as Dr. Aanchal S. Kakkar’s clinic and operated by {clinic.legalName}, The Derma House offers
-          {treatments.length} treatments across dermatology, lasers, hair restoration, anti-ageing, permanent makeup and
-          minor derma surgery, with an in-house clinical nutritionist.
+    <div class="container about">
+      <div class="about__text">
+        <h2>How the clinic works</h2>
+        <p class="lead">
+          The Derma House offers {treatments.length} treatments across dermatology, lasers, hair restoration, anti-ageing,
+          permanent makeup and minor skin surgery, with a clinical nutritionist on the team.
         </p>
         <p>
-          With thousands of satisfied clients, our experienced dermatologists and technicians focus on safe, personalised
-          treatment. Every plan starts with a consultation, in the clinic or online, so you know what to expect before you
-          begin.
+          Every treatment starts with a consultation, in the clinic or by video, so you know what is involved before you
+          begin. The clinic says it has treated thousands of patients.
         </p>
       </div>
-      <ul class="pillars">
+      <dl class="about__rows">
         {
           benefits.map((b) => (
-            <li class="card reveal">
-              <Icon name="check" size={20} />
-              <h3>{b.title}</h3>
-              <p>{b.body}</p>
+            <div>
+              <dt>{b.title}</dt>
+              <dd>{b.body}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="section well">
+    <div class="container">
+      <div class="head">
+        <h2>Seven specialities and hair transplant</h2>
+      </div>
+      <ul class="specs">
+        {
+          categories.map((c) => (
+            <li>
+              <a class="specs__name" href={`/${c.slug}/`}>
+                {c.title}
+              </a>
+              <p>{c.intro}</p>
             </li>
           ))
         }
+        <li>
+          <a class="specs__name" href="/hair-transplant/">Hair Transplant</a>
+          <p>Male, female, beard and eyebrow hair transplants.</p>
+        </li>
       </ul>
     </div>
   </section>
 
-  <section class="section section--ice">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Specialities</p>
-        <h2>Explore our specialised treatments</h2>
-      </div>
-      <div class="grid grid--3">
-        {
-          categories.map((c) => (
-            <a class="spec card reveal" href={`/${c.slug}/`}>
-              <h3>{c.title}</h3>
-              <p>{c.intro}</p>
-              <span class="link-arrow">Explore</span>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
   <section class="section">
-    <div class="wrap narrow">
-      <div class="section-head">
-        <p class="eyebrow">FAQ</p>
-        <h2>Frequently asked questions</h2>
-      </div>
+    <div class="container faq-grid">
+      <h2>Questions about the clinic</h2>
       <FaqList items={aboutFaq} />
     </div>
   </section>
@@ -88,63 +84,81 @@ import { clinic } from '../data/clinic';
 <style>
   .about {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(32px, 6vw, 80px);
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: var(--space-3xl);
     align-items: start;
   }
 
-  .pillars {
-    list-style: none;
+  .about__text {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .about__rows {
+    margin: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .about__rows div {
+    padding-block: var(--space-lg);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .about__rows dt {
+    font-family: var(--font-display);
+    font-size: var(--text-title);
+  }
+
+  .about__rows dd {
+    margin: var(--space-2xs) 0 0;
+    color: var(--color-ink-2);
+  }
+
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--gap-columns);
     margin: 0;
     padding: 0;
+    list-style: none;
+  }
+
+  .specs li {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: var(--space-xs);
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--color-rule);
   }
 
-  .pillars li {
-    padding: 24px;
-  }
-
-  .pillars svg {
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-
-  .pillars p,
-  .spec p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--ink-2);
-  }
-
-  .spec {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 26px;
-    text-decoration: none;
-    color: var(--ink);
-  }
-
-  .spec h3 {
+  .specs__name {
     font-family: var(--font-display);
-    font-size: 1.6rem;
-    margin: 0;
+    font-size: var(--text-title);
+    color: var(--color-ink);
+    text-decoration: none;
   }
 
-  .spec .link-arrow {
-    margin-top: auto;
+  .specs__name:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
   }
 
-  .narrow {
-    max-width: 820px;
+  .specs p {
+    color: var(--color-ink-2);
   }
 
-  @media (max-width: 900px) {
+  .faq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-xl) var(--gap-columns);
+    align-items: start;
+  }
+
+  @media (max-width: 60rem) {
     .about,
-    .pillars {
-      grid-template-columns: 1fr;
+    .faq-grid,
+    .specs {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

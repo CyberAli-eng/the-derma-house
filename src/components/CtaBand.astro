@@ -1,84 +1,52 @@
 ---
+// The page close: what a visitor needs to act (book, call, WhatsApp, hours), on the navy band.
 import Icon from './Icon.astro';
-import { clinic, whatsappLink } from '../data/clinic';
+import { clinic, fullAddress, whatsappLink } from '../data/clinic';
 interface Props {
   title?: string;
-  body?: string;
 }
-const {
-  title = 'Ready to transform your skin and hair?',
-  body = 'Take the first step toward clearer skin, fuller hair and renewed confidence. Book a consultation in person or online.',
-} = Astro.props;
+const { title = 'Book a consultation' } = Astro.props;
 ---
 
-<section class="cta">
-  <div class="wrap cta__inner">
+<section class="section--s band close">
+  <div class="container close__grid">
     <div>
       <h2>{title}</h2>
-      <p>{body}</p>
+      <p class="lead">{clinic.hours.label}. {clinic.hours.note}. {fullAddress}.</p>
     </div>
-    <div class="cta__actions">
-      <a class="btn btn--gold" href="/book-consultation/"><Icon name="calendar" /> Book consultation</a>
-      <a class="btn btn--light" href={whatsappLink()} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
-      <a class="cta__phone" href={`tel:${clinic.phoneE164}`}><Icon name="phone" size={18} /> {clinic.phoneDisplay}</a>
+    <div class="close__actions">
+      <a class="btn" href="/book-consultation/"><Icon name="calendar" /> Book a consultation</a>
+      <a class="btn btn--quiet" href={whatsappLink()} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
+      <a class="btn btn--quiet" href={`tel:${clinic.phoneE164}`}><Icon name="phone" /> {clinic.phoneDisplay}</a>
     </div>
   </div>
 </section>
 
 <style>
-  .cta {
-    padding-block: clamp(40px, 6vw, 72px);
-  }
-
-  .cta__inner {
-    position: relative;
+  .close__grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: var(--space-xl) var(--gap-columns);
     align-items: center;
-    padding: clamp(32px, 5vw, 64px);
-    border-radius: var(--radius-lg);
-    background:
-      radial-gradient(120% 140% at 100% 0%, rgb(180 138 60 / 0.28), transparent 55%),
-      var(--navy);
-    color: #c9dae5;
-    overflow: hidden;
   }
 
-  .cta h2 {
-    color: var(--white);
-    margin-bottom: 12px;
+  .close .lead {
+    margin-top: var(--space-md);
   }
 
-  .cta p {
-    margin: 0;
-    max-width: 52ch;
-  }
-
-  .cta__actions {
+  .close__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: var(--space-sm);
     justify-content: flex-end;
-    align-items: center;
   }
 
-  .cta__phone {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 700;
-    padding: 8px 4px;
-  }
-
-  @media (max-width: 860px) {
-    .cta__inner {
-      grid-template-columns: 1fr;
+  @media (max-width: 60rem) {
+    .close__grid {
+      grid-template-columns: minmax(0, 1fr);
     }
 
-    .cta__actions {
+    .close__actions {
       justify-content: flex-start;
     }
   }

@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { clinic, whatsappLink } from '../data/clinic';
-import { categories, treatmentsIn } from '../data/categories';
+import { categories, treatmentsIn, treatments } from '../data/categories';
 
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
@@ -14,22 +14,14 @@ const links = [
 ];
 ---
 
-<div class="topbar">
-  <div class="wrap topbar__inner">
-    <span><Icon name="clock" size={15} /> {clinic.hours.label}</span>
-    <span class="topbar__addr"><Icon name="pin" size={15} /> Opp. SBI Bank, Karnal Road, Kaithal</span>
-    <a href={`tel:${clinic.phoneE164}`}><Icon name="phone" size={15} /> {clinic.phoneDisplay}</a>
-  </div>
-</div>
-
 <header class="header" data-header>
-  <div class="wrap header__inner">
+  <div class="container header__inner">
     <Logo />
 
     <nav class="nav" id="mobile-nav" aria-label="Main" data-nav>
       <ul class="nav__list">
         <li class="nav__item nav__item--mega">
-          <button class="nav__link nav__trigger" aria-expanded="false" aria-controls="mega" data-mega-trigger>
+          <button type="button" class="nav__link nav__trigger" aria-expanded="false" aria-controls="mega" data-mega-trigger>
             Treatments <Icon name="chevron" size={16} />
           </button>
           <div class="mega" id="mega" data-mega>
@@ -52,8 +44,8 @@ const links = [
               }
             </div>
             <div class="mega__foot">
-              <a class="link-arrow" href="/treatments/">See all 43 treatments</a>
-              <a class="link-arrow" href="/food-nutrition/">Food, nutrition &amp; dietetics</a>
+              <a class="text-link" href="/treatments/">All {treatments.length} treatments</a>
+              <a class="text-link" href="/food-nutrition/">Food, nutrition and dietetics</a>
             </div>
           </div>
         </li>
@@ -68,17 +60,18 @@ const links = [
         }
       </ul>
       <div class="nav__mobile-cta">
-        <a class="btn" href="/book-consultation/"><Icon name="calendar" /> Book consultation</a>
-        <a class="btn btn--ghost" href={whatsappLink()} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp us</a>
+        <a class="btn" href="/book-consultation/"><Icon name="calendar" /> Book a consultation</a>
+        <a class="btn btn--quiet" href={whatsappLink()} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp the clinic</a>
+        <p class="nav__hours">{clinic.hours.label}. {clinic.hours.note}.</p>
       </div>
     </nav>
 
     <div class="header__actions">
-      <a class="header__phone" href={`tel:${clinic.phoneE164}`} aria-label={`Call ${clinic.phoneDisplay}`}>
-        <Icon name="phone" />
+      <a class="header__phone" href={`tel:${clinic.phoneE164}`}>
+        <Icon name="phone" size={18} /> <span>{clinic.phoneDisplay}</span>
       </a>
-      <a class="btn header__cta" href="/book-consultation/">Book consultation</a>
-      <button class="menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" data-menu>
+      <a class="btn header__cta" href="/book-consultation/">Book</a>
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" data-menu>
         <Icon name="menu" size={24} />
       </button>
     </div>
@@ -90,7 +83,6 @@ const links = [
   const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu]');
   const nav = document.querySelector<HTMLElement>('[data-nav]');
   const megaBtn = document.querySelector<HTMLButtonElement>('[data-mega-trigger]');
-
   const megaItem = megaBtn?.parentElement;
 
   function setMenu(open: boolean) {
@@ -137,124 +129,94 @@ const links = [
   window.matchMedia('(min-width: 1081px)').addEventListener('change', (e) => {
     if (e.matches) setMenu(false);
   });
-
-  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
 </script>
 
 <style>
-  .topbar {
-    background: var(--navy-950);
-    color: #b9cdda;
-    font-size: 0.82rem;
-  }
-
-  .topbar__inner {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding-block: 8px;
-  }
-
-  .topbar span,
-  .topbar a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .topbar a:hover {
-    color: var(--gold-soft);
-  }
-
   .header {
     position: sticky;
     top: 0;
-    z-index: 50;
-    /* No backdrop-filter on the header itself: it would become the containing
-       block for the fixed mobile nav and collapse it. The blur lives on ::before. */
-    isolation: isolate;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    z-index: var(--z-sticky-nav);
+    background: var(--color-field);
+    color: var(--color-field-ink);
+    border-bottom: 1px solid var(--color-field-rule);
   }
 
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: rgb(251 250 246 / 0.92);
-    backdrop-filter: saturate(1.4) blur(12px);
-  }
-
-  .header.is-scrolled {
-    border-color: var(--line);
-    box-shadow: 0 6px 20px rgb(0 36 58 / 0.06);
+  .header :global(:focus-visible) {
+    outline-color: var(--color-seal);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    min-height: var(--header-h);
+    gap: var(--space-lg);
+    min-height: var(--nav-h);
   }
 
   .nav__list {
     display: flex;
     align-items: center;
-    gap: 4px;
-    list-style: none;
+    gap: var(--space-2xs);
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 
   .nav__link {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 10px 14px;
+    gap: var(--space-2xs);
+    min-height: 44px;
+    padding: var(--space-xs) var(--space-sm);
     border: 0;
+    border-radius: var(--radius-input);
     background: none;
-    font: 700 0.95rem var(--font-body);
-    color: var(--navy-900);
+    color: var(--color-field-ink);
+    font: 400 var(--text-md) var(--font-body);
     text-decoration: none;
-    border-radius: 999px;
     cursor: pointer;
+    transition: color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
   }
 
-  .nav__link:hover,
+  .nav__link:hover {
+    color: var(--color-seal);
+  }
+
+  .nav__link:active {
+    background: var(--color-field-2);
+  }
+
   .nav__link[aria-current='page'] {
-    color: var(--gold-600);
+    color: var(--color-seal);
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
   }
 
   .nav__trigger svg {
-    transition: transform 0.2s ease;
+    transition: transform var(--dur-short) var(--ease-out);
   }
 
   .nav__trigger[aria-expanded='true'] svg {
     transform: rotate(180deg);
   }
 
-  .nav__item--mega {
-    position: static;
-  }
-
   .mega {
     position: absolute;
     left: 50%;
-    top: calc(100% - 6px);
-    width: min(100vw - 2 * var(--gutter), var(--wrap));
+    top: 100%;
+    width: min(100% - 2 * var(--gutter), var(--container) - 2 * var(--gutter));
     transform: translateX(-50%);
-    padding: 28px;
-    background: var(--white);
-    border: 1px solid var(--line-soft);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    padding: var(--space-xl);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border: 1px solid var(--color-rule);
+    border-top: 0;
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
     display: none;
+  }
+
+  .mega :global(:focus-visible) {
+    outline-color: var(--color-focus);
   }
 
   [aria-expanded='true'] + .mega {
@@ -263,71 +225,96 @@ const links = [
 
   .mega__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px 28px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl) var(--gap-columns);
   }
 
   .mega__title {
     display: block;
+    margin-bottom: var(--space-xs);
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--navy-900);
+    font-size: var(--text-lg);
+    color: var(--color-ink);
     text-decoration: none;
-    margin-bottom: 8px;
+  }
+
+  .mega__title:hover {
+    color: var(--color-accent);
   }
 
   .mega ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: grid;
-    gap: 4px;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .mega li a {
-    font-size: 0.92rem;
-    color: var(--ink-2);
+    font-size: var(--text-sm);
+    color: var(--color-ink-2);
     text-decoration: none;
   }
 
   .mega li a:hover {
-    color: var(--gold-600);
+    color: var(--color-accent);
+    text-decoration: underline;
   }
 
   .mega__foot {
     display: flex;
-    gap: 28px;
-    margin-top: 24px;
-    padding-top: 18px;
-    border-top: 1px solid var(--line-soft);
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-rule);
   }
 
   .header__actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--space-md);
   }
 
   .header__phone {
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    color: var(--navy);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-height: 44px;
+    color: var(--color-field-ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .header__phone:hover {
+    color: var(--color-seal);
+  }
+
+  .header .header__cta {
+    min-height: 44px;
+    border-color: var(--color-seal);
+    background: var(--color-seal);
+    color: var(--color-ink);
+  }
+
+  .header .header__cta:hover {
+    background: var(--color-field-ink);
+    color: var(--color-ink);
   }
 
   .menu-btn {
     display: none;
+    place-items: center;
     width: 44px;
     height: 44px;
-    place-items: center;
     border: 0;
+    border-radius: var(--radius-input);
     background: none;
-    color: var(--navy-900);
+    color: var(--color-field-ink);
     cursor: pointer;
+  }
+
+  .menu-btn:active {
+    background: var(--color-field-2);
   }
 
   .nav__mobile-cta {
@@ -335,29 +322,31 @@ const links = [
   }
 
   @media (max-width: 1080px) {
-    .topbar .topbar__addr {
-      display: none;
-    }
-
     .menu-btn {
       display: grid;
     }
 
-    .header__cta {
+    .header__phone span,
+    .header .header__cta {
       display: none;
     }
 
     .nav {
       position: fixed;
-      inset: var(--nav-top, var(--header-h)) 0 0 0;
-      background: var(--paper);
-      padding: 16px var(--gutter) 40px;
+      inset: var(--nav-top, var(--nav-h)) 0 0 0;
+      padding: var(--space-md) var(--gutter) var(--space-2xl);
       overflow-y: auto;
+      background: var(--color-paper);
+      color: var(--color-ink);
       display: none;
     }
 
     .nav.is-open {
       display: block;
+    }
+
+    .nav :global(:focus-visible) {
+      outline-color: var(--color-focus);
     }
 
     .nav__list {
@@ -368,25 +357,34 @@ const links = [
     .nav__link {
       width: 100%;
       justify-content: space-between;
-      padding: 16px 4px;
-      font-size: 1.1rem;
+      padding: var(--space-md) var(--space-2xs);
       border-radius: 0;
-      border-bottom: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--color-rule);
+      color: var(--color-ink);
+      font-size: var(--text-lg);
+    }
+
+    .nav__link:hover,
+    .nav__link[aria-current='page'] {
+      color: var(--color-accent);
+    }
+
+    .nav__link:active {
+      background: var(--color-paper-2);
     }
 
     .mega {
       position: static;
       transform: none;
       width: auto;
-      padding: 8px 0 16px;
+      padding: var(--space-xs) 0 var(--space-md);
       border: 0;
-      box-shadow: none;
       background: transparent;
     }
 
     .mega__grid {
-      grid-template-columns: 1fr;
-      gap: 6px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2xs);
     }
 
     .mega ul,
@@ -395,26 +393,20 @@ const links = [
     }
 
     .mega__title {
+      padding: var(--space-xs) var(--space-sm);
       font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 400;
-      padding: 6px 12px;
+      font-size: var(--text-md);
     }
 
     .nav__mobile-cta {
       display: grid;
-      gap: 12px;
-      margin-top: 28px;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .topbar__inner span:first-child {
-      display: none;
+      gap: var(--space-sm);
+      margin-top: var(--space-xl);
     }
 
-    .topbar__inner {
-      justify-content: center;
+    .nav__hours {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
     }
   }
 </style>

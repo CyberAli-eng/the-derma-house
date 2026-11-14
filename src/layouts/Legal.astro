@@ -6,20 +6,12 @@ const { frontmatter } = Astro.props;
 ---
 
 <Base title={frontmatter.title} description={frontmatter.description}>
-  <PageHero title={frontmatter.title} eyebrow={`Effective ${frontmatter.effective}`} crumbs={[{ label: frontmatter.title }]} />
+  <PageHero title={frontmatter.title} lede={`In effect from ${frontmatter.effective}.`} crumbs={[{ label: frontmatter.title }]} />
   <section class="section">
-    <div class="wrap legal prose">
-      <slot />
+    <div class="container">
+      <div class="prose">
+        <slot />
+      </div>
     </div>
   </section>
 </Base>
-
-<style>
-  .legal {
-    max-width: 780px;
-  }
-
-  .legal :global(h2:first-child) {
-    margin-top: 0;
-  }
-</style>

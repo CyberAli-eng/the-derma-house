@@ -15,9 +15,9 @@ const { title = 'Book your consultation', preset = '', compact = false } = Astro
 const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<form class:list={['booking card', { 'booking--compact': compact }]} data-booking data-wa={clinic.whatsapp} method="post" action="/book-consultation/" novalidate>
+<form class:list={['booking', { 'booking--compact': compact }]} data-booking data-wa={clinic.whatsapp} method="post" action="/book-consultation/" novalidate>
   <h2 class="booking__title">{title}</h2>
-  <p class="booking__sub">Share your concern and our team will confirm your appointment within 24 hours.</p>
+  <p class="booking__sub">We reply within 24 hours to confirm a time.</p>
 
   <div class="field">
     <label for={`${id}-name`}>Your name</label>
@@ -37,7 +37,7 @@ const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
       <option value="">Not sure yet</option>
       {categories.map((c) => <option value={c.title} selected={preset === c.title}>{c.title}</option>)}
       <option value="Hair Transplant" selected={preset === 'Hair Transplant'}>Hair Transplant</option>
-      <option value="Food, Nutrition & Dietetics" selected={preset === 'Food, Nutrition & Dietetics'}>Food, Nutrition &amp; Dietetics</option>
+      <option value="Food, Nutrition & Dietetics" selected={preset === 'Food, Nutrition & Dietetics'}>Food, Nutrition and Dietetics</option>
       {preset && !categories.some((c) => c.title === preset) && preset !== 'Hair Transplant' && preset !== 'Food, Nutrition & Dietetics' && (
         <option value={preset} selected>{preset}</option>
       )}
@@ -48,7 +48,7 @@ const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
     !compact && (
       <div class="field">
         <label for={`${id}-msg`}>
-          Tell us about your skin, hair or body concern <span class="field__opt">(optional)</span>
+          What is bothering you? <span class="field__opt">(optional)</span>
         </label>
         <textarea id={`${id}-msg`} name="message" rows="3" maxlength="600" />
       </div>
@@ -62,11 +62,11 @@ const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
     </p>
   </noscript>
 
-  <button class="btn btn--gold booking__submit" type="submit">
-    <Icon name="whatsapp" /> Send request on WhatsApp
+  <button class="btn booking__submit" type="submit">
+    <Icon name="whatsapp" /> Send on WhatsApp
   </button>
   <p class="booking__note">
-    Prefer to talk? Call <a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a>. By sending, you agree to our
+    Prefer to talk? Call <a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a>. By sending, you agree to our{' '}
     <a href="/privacy-policy/">privacy policy</a>.
   </p>
 </form>
@@ -128,36 +128,37 @@ const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
 
 <style>
   .booking {
-    padding: clamp(24px, 4vw, 36px);
     display: grid;
-    gap: 16px;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-card);
+    background: var(--color-paper);
   }
 
   .booking__title {
-    font-size: var(--step-2);
-    margin: 0;
+    font-size: var(--text-2xl);
   }
 
   .booking__sub {
-    margin: -6px 0 4px;
-    color: var(--ink-2);
-    font-size: 0.95rem;
+    margin-top: calc(-1 * var(--space-xs));
+    color: var(--color-ink-2);
   }
 
   .field {
     display: grid;
-    gap: 6px;
+    gap: var(--space-2xs);
   }
 
   .field label {
+    font-size: var(--text-sm);
     font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--navy-900);
+    color: var(--color-ink);
   }
 
   .field__opt {
     font-weight: 400;
-    color: var(--ink-3);
+    color: var(--color-muted);
   }
 
   .field input,
@@ -165,39 +166,44 @@ const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
   .field textarea {
     width: 100%;
     min-height: 48px;
-    padding: 12px 14px;
-    border: 1px solid #c3d3dd;
-    border-radius: var(--radius-sm);
-    background: var(--white);
+    padding: var(--space-sm);
+    border: 1px solid var(--color-muted);
+    border-radius: var(--radius-input);
+    background: var(--color-paper);
+    color: var(--color-ink);
     font: inherit;
-    color: var(--ink);
+    font-size: var(--text-md);
   }
 
   .field textarea {
     resize: vertical;
   }
 
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    outline: 2px solid var(--gold);
-    outline-offset: 1px;
-    border-color: var(--gold);
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-color: var(--color-ink-2);
+  }
+
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -1px;
   }
 
   .field [aria-invalid='true'] {
-    border-color: var(--danger);
+    border-color: var(--color-error);
   }
 
   .field__error {
-    margin: 0;
-    font-size: 0.85rem;
-    color: var(--danger);
+    min-height: 1lh;
+    font-size: var(--text-sm);
+    color: var(--color-error);
   }
 
   .booking__submit {
     width: 100%;
-    margin-top: 4px;
   }
 
   html:not(.js) .booking .field,
@@ -206,15 +212,17 @@ const id = `bf-${Math.random().toString(36).slice(2, 8)}`;
   }
 
   .booking__nojs {
-    margin: 0;
-    padding: 14px 16px;
-    border-radius: var(--radius-sm);
-    background: var(--ice-50);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-input);
+    background: var(--color-paper-2);
   }
 
   .booking__note {
-    margin: 0;
-    font-size: 0.82rem;
-    color: var(--ink-3);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .booking__note a {
+    color: var(--color-accent);
   }
 </style>

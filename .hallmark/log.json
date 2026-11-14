@@ -1,0 +1,33 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "shape": "Appointment Book",
+  "theme": "brand",
+  "axes": "light/roman-serif/navy",
+  "hero": "Stage",
+  "nav": "slab",
+  "footer": "mast",
+  "imagery": "the clinic photographs: treatments, 4 before-and-after pairs, nutritionist portrait",
+  "photos": [],
+  "entry": "none",
+  "fingerprint": "derma-house-redesign-2026-11-14",
+  "sections": [
+   "Stage hero",
+   "Switcher treatment menu",
+   "Grid before-and-after",
+   "Band split nutritionist",
+   "Form booking",
+   "Rows FAQ",
+   "Schedule opening hours",
+   "Mast footer"
+  ],
+  "signature": "the treatment menu, switched by speciality",
+  "waived": [
+   "44c"
+  ],
+  "prompt": "a doctor-led dermatology and hair clinic in Kaithal; patients book by phone or WhatsApp",
+  "date": "2026-11-14"
+ }
+]

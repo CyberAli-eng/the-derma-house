@@ -18,6 +18,7 @@ const { title, description, image = img.hero, schema = [], noindex: pageNoindex 
 // Preview/staging builds set PUBLIC_NOINDEX=true so search engines never index a copy of the live site.
 const noindex = pageNoindex || import.meta.env.PUBLIC_NOINDEX === 'true';
 const canonical = new URL(Astro.url.pathname, clinic.site).href;
+const ogImage = new URL(image, clinic.site).href;
 const fullTitle = title.includes(clinic.name) ? title : `${title} | ${clinic.name}, Kaithal`;
 
 const clinicSchema = {
@@ -29,7 +30,8 @@ const clinicSchema = {
   url: clinic.site,
   telephone: clinic.phoneE164,
   email: clinic.email,
-  image: img.hero,
+  image: new URL(img.hero, clinic.site).href,
+  logo: new URL('/images/logo.png', clinic.site).href,
   medicalSpecialty: 'Dermatology',
   address: {
     '@type': 'PostalAddress',
@@ -56,23 +58,23 @@ const jsonLd = [clinicSchema, ...schema];
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#00314d" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/images/favicon.png" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={clinic.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://images.unsplash.com" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Lato:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Lato:wght@400;700&display=swap"
     />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
@@ -113,6 +115,16 @@ const jsonLd = [clinicSchema, ...schema];
       } else {
         els.forEach((el) => el.classList.add('is-in'));
       }
+
+      // A cross-origin iframe (the map) never matches :focus once focus moves inside it,
+      // so mark it while it holds focus and draw the ring from that class.
+      const markFrame = () => {
+        document.querySelectorAll('iframe.is-focused').forEach((f) => f.classList.remove('is-focused'));
+        const active = document.activeElement;
+        if (active instanceof HTMLIFrameElement) active.classList.add('is-focused');
+      };
+      window.addEventListener('blur', () => setTimeout(markFrame, 0));
+      window.addEventListener('focus', markFrame);
     </script>
 
     <style is:global>
@@ -122,23 +134,26 @@ const jsonLd = [clinicSchema, ...schema];
 
       .wa-float {
         position: fixed;
-        right: 20px;
-        bottom: 24px;
-        z-index: 40;
+        right: var(--space-lg);
+        bottom: var(--space-lg);
+        z-index: var(--z-sticky);
         display: grid;
         place-items: center;
         width: 56px;
         height: 56px;
-        border-radius: 50%;
-        background: #1f8f55;
-        color: var(--white);
-        box-shadow: 0 10px 30px rgb(0 0 0 / 0.2);
-        transition: transform 0.2s ease;
+        border-radius: var(--radius-pill);
+        background: var(--color-whatsapp);
+        color: var(--color-whatsapp-ink);
+        transition: transform var(--dur-micro) var(--ease-out);
       }
 
       .wa-float:hover {
-        color: var(--white);
-        transform: scale(1.06);
+        color: var(--color-whatsapp-ink);
+        transform: translateY(-2px);
+      }
+
+      .wa-float:active {
+        transform: translateY(0);
       }
 
       .mobile-bar {
@@ -153,34 +168,41 @@ const jsonLd = [clinicSchema, ...schema];
         .mobile-bar {
           position: fixed;
           inset: auto 0 0 0;
-          z-index: 45;
+          z-index: var(--z-sticky);
           display: grid;
-          grid-template-columns: 1fr 1fr 1.2fr;
-          gap: 8px;
-          padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-          background: rgb(255 255 255 / 0.96);
-          border-top: 1px solid var(--line);
-          backdrop-filter: blur(10px);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: var(--space-xs);
+          padding: var(--space-xs) var(--space-sm) calc(var(--space-xs) + env(safe-area-inset-bottom));
+          background: var(--color-paper);
+          border-top: 1px solid var(--color-rule);
         }
 
         .mobile-bar a {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 6px;
-          min-height: 46px;
-          border-radius: 999px;
-          border: 1px solid var(--line);
+          gap: var(--space-xs);
+          min-height: 48px;
+          border: 1px solid var(--color-rule);
+          border-radius: var(--radius-input);
           font-weight: 700;
-          font-size: 0.92rem;
-          color: var(--navy-900);
+          font-size: var(--text-sm);
+          color: var(--color-ink);
           text-decoration: none;
         }
 
+        .mobile-bar a:active {
+          background: var(--color-paper-2);
+        }
+
         .mobile-bar .mobile-bar__book {
-          background: var(--navy);
-          border-color: var(--navy);
-          color: var(--white);
+          background: var(--color-accent);
+          border-color: var(--color-accent);
+          color: var(--color-accent-ink);
+        }
+
+        body {
+          padding-bottom: 72px;
         }
       }
     </style>

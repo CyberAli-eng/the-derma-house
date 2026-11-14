@@ -19,7 +19,7 @@ export const clinic = {
     country: 'IN',
   },
   hours: {
-    label: 'Mon–Sat, 10:00 AM – 7:00 PM',
+    label: 'Monday to Saturday, 10:00 AM to 7:00 PM',
     note: 'Closed on Sundays',
     schema: 'Mo-Sa 10:00-19:00',
   },

@@ -1,115 +1,177 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
 import BookingForm from '../components/BookingForm.astro';
-import Icon from '../components/Icon.astro';
-import { process } from '../data/content';
+import { process, bookingFacts } from '../data/content';
 import { clinic } from '../data/clinic';
 ---
 
 <Base
   title="Book a Skin & Hair Consultation"
-  description="Book an in-clinic or online consultation with The Derma House dermatologists in Kaithal. We confirm your appointment within 24 hours."
+  description="Book an in-clinic or video consultation with The Derma House in Kaithal. The clinic confirms your appointment within 24 hours."
 >
-  <PageHero
-    title="Book your consultation"
-    eyebrow="In-clinic or online"
-    lede="Get expert guidance for your skin, hair and aesthetic concerns. Fill the quick form and our team will contact you within 24 hours to confirm your appointment."
-    crumbs={[{ label: 'Book consultation' }]}
-  />
-
-  <section class="section">
-    <div class="wrap split">
-      <BookingForm title="Request an appointment" />
-      <div>
-        <h2>What happens next</h2>
-        <ol class="next">
+  <section class="book">
+    <div class="container book__grid">
+      <div class="book__text">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><span aria-current="page">Book a consultation</span></li>
+          </ol>
+        </nav>
+        <h1>Book a consultation</h1>
+        <p class="lead">In the clinic or by video. The Derma House confirms your time within 24 hours.</p>
+        <dl class="facts">
           {
-            process.map((s, i) => (
-              <li>
-                <span class="next__num">{i + 1}</span>
-                <div>
-                  <h3>{s.title}</h3>
-                  <p>{s.body}</p>
-                </div>
-              </li>
+            bookingFacts.map((f) => (
+              <div>
+                <dt>{f.term}</dt>
+                <dd>{f.detail}</dd>
+              </div>
             ))
           }
-        </ol>
-        <div class="card info">
-          <p><Icon name="clock" /> {clinic.hours.label} · {clinic.hours.note}</p>
-          <p><Icon name="video" /> Online video consultations available</p>
-          <p><Icon name="phone" /> Prefer to call? <a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a></p>
-        </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>{clinic.hours.label}. {clinic.hours.note}.</dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd><a href={`tel:${clinic.phoneE164}`}>{clinic.phoneDisplay}</a></dd>
+          </div>
+        </dl>
       </div>
+      <BookingForm title="Request an appointment" />
+    </div>
+  </section>
+
+  <section class="section well">
+    <div class="container">
+      <h2 class="next__h">What happens next</h2>
+      <ol class="next">
+        {
+          process.map((s) => (
+            <li>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </section>
 </Base>
 
 <style>
-  .split {
+  .book {
+    padding-block: var(--space-3xl);
+  }
+
+  .book__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(32px, 5vw, 72px);
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--space-3xl);
     align-items: start;
   }
 
-  .next {
-    list-style: none;
-    padding: 0;
-    margin: 24px 0 32px;
+  .book__text {
     display: grid;
-    gap: 20px;
+    gap: var(--space-lg);
+  }
+
+  .crumbs ol {
+    display: flex;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-right: var(--space-xs);
+  }
+
+  .crumbs a {
+    color: var(--color-ink-2);
+  }
+
+  .facts {
+    margin: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .facts div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    gap: var(--space-md);
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .facts dt {
+    font-weight: 700;
+  }
+
+  .facts dd {
+    margin: 0;
+    color: var(--color-ink-2);
+  }
+
+  .facts a {
+    color: var(--color-accent);
+  }
+
+  .next__h {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .next {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gap-columns);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
   }
 
   .next li {
     display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 16px;
+    gap: var(--space-xs);
+    align-content: start;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-ink);
+    counter-increment: step;
   }
 
-  .next__num {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: var(--white);
-    font-weight: 700;
-  }
-
-  .next h3 {
-    margin-bottom: 4px;
+  .next li::before {
+    content: counter(step);
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    line-height: 1;
+    color: var(--color-accent);
   }
 
   .next p {
-    margin: 0;
-    color: var(--ink-2);
+    color: var(--color-ink-2);
   }
 
-  .info {
-    padding: 20px 24px;
-    display: grid;
-    gap: 10px;
+  @media (max-width: 60rem) {
+    .book__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
+    }
+
+    .next {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-xl) var(--gap-columns);
+    }
   }
 
-  .info p {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-    color: var(--ink-2);
-  }
-
-  .info svg {
-    color: var(--gold);
-    flex: none;
-  }
-
-  @media (max-width: 900px) {
-    .split {
-      grid-template-columns: 1fr;
+  @media (max-width: 40rem) {
+    .next {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>
