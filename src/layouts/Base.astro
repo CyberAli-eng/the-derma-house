@@ -14,7 +14,9 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description, image = img.hero, schema = [], noindex = false } = Astro.props;
+const { title, description, image = img.hero, schema = [], noindex: pageNoindex = false } = Astro.props;
+// Preview/staging builds set PUBLIC_NOINDEX=true so search engines never index a copy of the live site.
+const noindex = pageNoindex || import.meta.env.PUBLIC_NOINDEX === 'true';
 const canonical = new URL(Astro.url.pathname, clinic.site).href;
 const fullTitle = title.includes(clinic.name) ? title : `${title} | ${clinic.name}, Kaithal`;
 
